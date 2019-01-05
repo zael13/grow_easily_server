@@ -13,19 +13,19 @@ def test_serialize_domain_recipe():
 
     recipe = Recipe(
         code=code,
-        size=200,
+        duration=200,
         price=10,
         longitude=-0.09998975,
-        latitude=51.75436293
+        rating=51.75436293
     )
 
     expected_json = """
         {{
             "code": "{}",
-            "size": 200,
+            "duration": 200,
             "price": 10,
             "longitude": -0.09998975,
-            "latitude": 51.75436293
+            "rating": 51.75436293
         }}
     """.format(code)
 

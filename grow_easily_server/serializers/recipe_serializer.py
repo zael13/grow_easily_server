@@ -7,9 +7,9 @@ class RecipeEncoder(json.JSONEncoder):
         try:
             to_serialize = {
                 'code': str(o.code),
-                'size': o.size,
+                'duration': o.duration,
                 'price': o.price,
-                "latitude": o.latitude,
+                "rating": o.rating,
                 "longitude": o.longitude,
             }
             return to_serialize

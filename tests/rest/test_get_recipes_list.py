@@ -6,10 +6,10 @@ from grow_easily_server.shared import response_object as res
 
 recipe1_dict = {
     'code': '3251a5bd-86be-428d-8ae9-6e51a8048c33',
-    'size': 200,
+    'duration': 200,
     'price': 10,
     'longitude': -0.09998975,
-    'latitude': 51.75436293
+    'rating': 51.75436293
 }
 
 recipe1_domain_model = Recipe.from_dict(recipe1_dict)

@@ -13,34 +13,34 @@ from grow_easily_server.use_cases import recipe_use_cases as uc
 def domain_recipes():
     recipe_1 = Recipe(
         code=uuid.uuid4(),
-        size=215,
+        duration=215,
         price=39,
         longitude=-0.09998975,
-        latitude=51.75436293,
+        rating=51.75436293,
     )
 
     recipe_2 = Recipe(
         code=uuid.uuid4(),
-        size=405,
+        duration=405,
         price=66,
         longitude=0.18228006,
-        latitude=51.74640997,
+        rating=51.74640997,
     )
 
     recipe_3 = Recipe(
         code=uuid.uuid4(),
-        size=56,
+        duration=56,
         price=60,
         longitude=0.27891577,
-        latitude=51.45994069,
+        rating=51.45994069,
     )
 
     recipe_4 = Recipe(
         code=uuid.uuid4(),
-        size=93,
+        duration=93,
         price=48,
         longitude=0.33894476,
-        latitude=51.39916678,
+        rating=51.39916678,
     )
 
     return [recipe_1, recipe_2, recipe_3, recipe_4]

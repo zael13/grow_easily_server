@@ -11,31 +11,31 @@ def recipe_dicts():
     return [
         {
             'code': 'f853578c-fc0f-4e65-81b8-566c5dffa35a',
-            'size': 215,
+            'duration': 215,
             'price': 39,
             'longitude': -0.09998975,
-            'latitude': 51.75436293,
+            'rating': 51.75436293,
         },
         {
             'code': 'fe2c3195-aeff-487a-a08f-e0bdc0ec6e9a',
-            'size': 405,
+            'duration': 405,
             'price': 66,
             'longitude': 0.18228006,
-            'latitude': 51.74640997,
+            'rating': 51.74640997,
         },
         {
             'code': '913694c6-435a-4366-ba0d-da5334a611b2',
-            'size': 56,
+            'duration': 56,
             'price': 60,
             'longitude': 0.27891577,
-            'latitude': 51.45994069,
+            'rating': 51.45994069,
         },
         {
             'code': 'eed76e77-55c1-41ce-985d-ca49bf6c0585',
-            'size': 93,
+            'duration': 93,
             'price': 48,
             'longitude': 0.33894476,
-            'latitude': 51.39916678,
+            'rating': 51.39916678,
         }
     ]
 
@@ -104,44 +104,44 @@ def test_repository_list_with_filters_price_gt(recipe_dicts):
     )
 
 
-def test_repository_list_with_filters_size(recipe_dicts):
+def test_repository_list_with_filters_duration(recipe_dicts):
     repo = memrepo.MemRepo(recipe_dicts)
 
     _check_results(
-        repo.list(filters={'size': 93}),
+        repo.list(filters={'duration': 93}),
         [recipe_dicts[3]]
     )
 
 
-def test_repository_list_with_filters_size_eq(recipe_dicts):
+def test_repository_list_with_filters_duration_eq(recipe_dicts):
     repo = memrepo.MemRepo(recipe_dicts)
     _check_results(
-        repo.list(filters={'size__eq': 93}),
+        repo.list(filters={'duration__eq': 93}),
         [recipe_dicts[3]]
     )
 
 
-def test_repository_list_with_filters_size_lt(recipe_dicts):
+def test_repository_list_with_filters_duration_lt(recipe_dicts):
     repo = memrepo.MemRepo(recipe_dicts)
     _check_results(
-        repo.list(filters={'size__lt': 60}),
+        repo.list(filters={'duration__lt': 60}),
         [recipe_dicts[2]]
     )
 
 
-def test_repository_list_with_filters_size_gt(recipe_dicts):
+def test_repository_list_with_filters_duration_gt(recipe_dicts):
     repo = memrepo.MemRepo(recipe_dicts)
     _check_results(
-        repo.list(filters={'size__gt': 400}),
+        repo.list(filters={'duration__gt': 400}),
         [recipe_dicts[1]]
     )
 
 
-def test_repository_list_with_filters_latitude(recipe_dicts):
+def test_repository_list_with_filters_rating(recipe_dicts):
     repo = memrepo.MemRepo(recipe_dicts)
 
     _check_results(
-        repo.list(filters={'latitude': 51.39916678}),
+        repo.list(filters={'rating': 51.39916678}),
         [recipe_dicts[3]]
     )
 
