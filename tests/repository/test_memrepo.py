@@ -137,6 +137,15 @@ def test_repository_list_with_filters_size_gt(recipe_dicts):
     )
 
 
+def test_repository_list_with_filters_latitude(recipe_dicts):
+    repo = memrepo.MemRepo(recipe_dicts)
+
+    _check_results(
+        repo.list(filters={'latitude': 51.39916678}),
+        [recipe_dicts[3]]
+    )
+
+
 def test_repository_list_with_filters_code(recipe_dicts):
     repo = memrepo.MemRepo(recipe_dicts)
 
