@@ -3,7 +3,7 @@ import uuid
 from grow_easily_server.domain.recipe import Recipe
 
 from datetime import datetime, time, timedelta
-from grow_easily_server.domain.recipe import HWType, \
+from grow_easily_server.domain.RecipeItem import HWType, \
     Event, Controller, CalendarEvent, DailyEvent, PeriodicEvent
 
 TEST_DATE = datetime(2007, 12, 5, 22, 30)
@@ -121,31 +121,6 @@ def test_add_the_daily_event_of_the_same_type_twice_should_not_substitute_old_va
     recipe.add_item(DailyEvent(HWType.DHT_TEMPERATURE, time(15, 30)))
     assert(len(recipe.get_items()) == 2)
     assert(recipe.items[0].day_time == TEST_TIME)
-
-
-def test_calendar_event_should_raise_an_exception_if_not_datetime_object_used():
-    with pytest.raises(TypeError):
-        CalendarEvent(HWType.DHT_TEMPERATURE, "fake_item")
-
-
-def test_daily_event_should_raise_an_exception_if_not_time_object_used():
-    with pytest.raises(TypeError):
-        DailyEvent(HWType.DHT_TEMPERATURE, "fake_item")
-
-
-def test_periodic_event_should_raise_an_exception_if_not_time_object_used():
-    with pytest.raises(TypeError):
-        PeriodicEvent(HWType.DHT_TEMPERATURE, "fake_item")
-
-
-def test_periodic_event_should_store_correct_periodic_event():
-    pe = PeriodicEvent(HWType.DHT_TEMPERATURE, TEST_TIME)
-    assert (pe.period == TEST_TIME)
-
-
-def test_event_should_raise_an_exception_if_not_time_object_used_for_duration():
-    with pytest.raises(TypeError):
-        Event(HWType.DHT_TEMPERATURE, "fake_item")
 
 
 def test_new_added_items_should_not_have_the_s_ame_type_as_existing_controller():

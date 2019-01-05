@@ -1,0 +1,71 @@
+import uuid
+import pytest
+
+from datetime import datetime, time, timedelta
+from grow_easily_server.domain.RecipeItem import HWType, \
+    Event, Controller, CalendarEvent, DailyEvent, PeriodicEvent, Hardware
+
+TEST_DATE = datetime(2007, 12, 5, 22, 30)
+ONE_DAY = timedelta(days=1)
+TEST_TIME = time(13, 30)
+ONE_HOUR = timedelta(hours=1)
+
+
+def test_calendar_event_should_raise_an_exception_if_not_datetime_object_used():
+    with pytest.raises(TypeError):
+        CalendarEvent(HWType.DHT_TEMPERATURE, "fake_item")
+
+
+def test_daily_event_should_raise_an_exception_if_not_time_object_used():
+    with pytest.raises(TypeError):
+        DailyEvent(HWType.DHT_TEMPERATURE, "fake_item")
+
+
+def test_periodic_event_should_raise_an_exception_if_not_time_object_used():
+    with pytest.raises(TypeError):
+        PeriodicEvent(HWType.DHT_TEMPERATURE, "fake_item")
+
+
+def test_event_should_raise_an_exception_if_not_time_object_used_for_duration():
+    with pytest.raises(TypeError):
+        Event(HWType.DHT_TEMPERATURE, "fake_item")
+
+
+def test_periodic_event_should_store_correct_periodic_event():
+    pe = PeriodicEvent(HWType.DHT_TEMPERATURE, TEST_TIME)
+    assert (pe.period == TEST_TIME)
+
+
+# def test_hardware_should_raise_an_exception_if_code_is_not_uuid():
+#     with pytest.raises(TypeError):
+#         Hardware("fake", "test module", HWType.DHT_TEMPERATURE, 2)
+
+
+def test_hardware_should_raise_an_exception_if_hw_type_is_not_hwtype_object():
+    with pytest.raises(TypeError):
+        Hardware(uuid.uuid4(), "test module", "fake", [1])
+
+
+def test_hardware_should_raise_an_exception_if_module_name_is_not_string():
+    with pytest.raises(TypeError):
+        Hardware(uuid.uuid4(), 1, HWType.DHT_TEMPERATURE, [1])
+
+
+def test_hardware_should_raise_an_exception_if_module_name_is_empty():
+    with pytest.raises(ValueError):
+        Hardware(uuid.uuid4(), "", HWType.DHT_TEMPERATURE, [1])
+
+
+def test_hardware_should_raise_an_exception_if_module_pin_is_less_than_zero():
+    with pytest.raises(ValueError):
+        Hardware(uuid.uuid4(), "test module", HWType.DHT_TEMPERATURE, [-1])
+
+
+def test_hardware_should_raise_an_exception_if_module_pin_is_greater_than_16():
+    with pytest.raises(ValueError):
+        Hardware(uuid.uuid4(), "test module", HWType.DHT_TEMPERATURE, [17])
+
+
+def test_hardware_should_raise_an_exception_if_one_of_modules_pins_is_greater_than_16():
+    with pytest.raises(ValueError):
+        Hardware(uuid.uuid4(), "test module", HWType.DHT_TEMPERATURE, [1, 2, 17])
