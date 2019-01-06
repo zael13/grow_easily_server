@@ -23,10 +23,19 @@ class RecipeItem:
 
 class Hardware:
     def __init__(self, code, name, hw_type, pins=None):
+        self.__check_input_values(name, hw_type, pins)
+
+        self.code = code
+        self.name = name
+        self.hw_type = hw_type
+        self.pins = pins
+
+    @staticmethod
+    def __check_input_values(name, hw_type, pins):
         if type(name) is not str:
             raise TypeError("Module name should be only String type")
         elif not len(name):
-            raise ValueError("Module name should be empty")
+            raise ValueError("Module name should not be empty")
         elif type(hw_type) is not HWType:
             raise TypeError("Hardware should be HWType type object")
         elif pins is not None and not isinstance(pins, list):
@@ -34,11 +43,6 @@ class Hardware:
         for pin in pins:
             if pin < 0 or pin > 16:
                 raise ValueError("Pin should not be less than zero and greater than 16")
-
-        self.code = code
-        self.name = name
-        self.hw_type = hw_type
-        self.pins = pins
 
 
 class Controller(RecipeItem):

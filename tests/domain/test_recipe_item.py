@@ -56,6 +56,11 @@ def test_hardware_should_raise_an_exception_if_module_name_is_empty():
         Hardware(uuid.uuid4(), "", HWType.DHT_TEMPERATURE, [1])
 
 
+def test_hardware_should_raise_an_exception_if_module_pin_is_not_list_type():
+    with pytest.raises(TypeError):
+        Hardware(uuid.uuid4(), "test module", HWType.DHT_TEMPERATURE, 2)
+
+
 def test_hardware_should_raise_an_exception_if_module_pin_is_less_than_zero():
     with pytest.raises(ValueError):
         Hardware(uuid.uuid4(), "test module", HWType.DHT_TEMPERATURE, [-1])
@@ -69,3 +74,12 @@ def test_hardware_should_raise_an_exception_if_module_pin_is_greater_than_16():
 def test_hardware_should_raise_an_exception_if_one_of_modules_pins_is_greater_than_16():
     with pytest.raises(ValueError):
         Hardware(uuid.uuid4(), "test module", HWType.DHT_TEMPERATURE, [1, 2, 17])
+
+
+def test_hardware_should_set_all_internal_values_according_init_arguments():
+    code = uuid.uuid4()
+    hw = Hardware(code, "test module", HWType.DHT_TEMPERATURE, [1, 2, 16])
+    assert (hw.code == code)
+    assert (hw.name == "test module")
+    assert (hw.hw_type == HWType.DHT_TEMPERATURE)
+    assert (hw.pins == [1, 2, 16])
