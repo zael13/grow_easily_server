@@ -12,29 +12,29 @@ def recipe_dicts():
         {
             'code': 'f853578c-fc0f-4e65-81b8-566c5dffa35a',
             'duration': 215,
-            'price': 39,
-            'longitude': -0.09998975,
+            'owner': 39,
+            'name': -0.09998975,
             'rating': 51.75436293,
         },
         {
             'code': 'fe2c3195-aeff-487a-a08f-e0bdc0ec6e9a',
             'duration': 405,
-            'price': 66,
-            'longitude': 0.18228006,
+            'owner': 66,
+            'name': 0.18228006,
             'rating': 51.74640997,
         },
         {
             'code': '913694c6-435a-4366-ba0d-da5334a611b2',
             'duration': 56,
-            'price': 60,
-            'longitude': 0.27891577,
+            'owner': 60,
+            'name': 0.27891577,
             'rating': 51.45994069,
         },
         {
             'code': 'eed76e77-55c1-41ce-985d-ca49bf6c0585',
             'duration': 93,
-            'price': 48,
-            'longitude': 0.33894476,
+            'owner': 48,
+            'name': 0.33894476,
             'rating': 51.39916678,
         }
     ]
@@ -60,46 +60,46 @@ def test_repository_list_with_filters_unknown_key(recipe_dicts):
     repo = memrepo.MemRepo(recipe_dicts)
 
     with pytest.raises(KeyError):
-        repo.list(filters={'name': 'aname'})
+        repo.list(filters={'unknown_key': 'an_unknown_key'})
 
 
 def test_repository_list_with_filters_unknown_operator(recipe_dicts):
     repo = memrepo.MemRepo(recipe_dicts)
 
     with pytest.raises(ValueError):
-        repo.list(filters={'price__in': [20, 30]})
+        repo.list(filters={'owner__in': [20, 30]})
 
 
-def test_repository_list_with_filters_price(recipe_dicts):
+def test_repository_list_with_filters_owner(recipe_dicts):
     repo = memrepo.MemRepo(recipe_dicts)
 
     _check_results(
-        repo.list(filters={'price': 60}),
+        repo.list(filters={'owner': 60}),
         [recipe_dicts[2]]
     )
 
 
-def test_repository_list_with_filters_price_eq(recipe_dicts):
+def test_repository_list_with_filters_owner_eq(recipe_dicts):
     repo = memrepo.MemRepo(recipe_dicts)
 
     _check_results(
-        repo.list(filters={'price__eq': 60}),
+        repo.list(filters={'owner__eq': 60}),
         [recipe_dicts[2]]
     )
 
 
-def test_repository_list_with_filters_price_lt(recipe_dicts):
+def test_repository_list_with_filters_owner_lt(recipe_dicts):
     repo = memrepo.MemRepo(recipe_dicts)
 
     _check_results(
-        repo.list(filters={'price__lt': 60}),
+        repo.list(filters={'owner__lt': 60}),
         [recipe_dicts[0], recipe_dicts[3]])
 
 
-def test_repository_list_with_filters_price_gt(recipe_dicts):
+def test_repository_list_with_filters_owner_gt(recipe_dicts):
     repo = memrepo.MemRepo(recipe_dicts)
     _check_results(
-        repo.list(filters={'price__gt': 60}),
+        repo.list(filters={'owner__gt': 60}),
         [recipe_dicts[1]]
     )
 

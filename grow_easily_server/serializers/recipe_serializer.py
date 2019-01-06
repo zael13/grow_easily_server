@@ -8,9 +8,9 @@ class RecipeEncoder(json.JSONEncoder):
             to_serialize = {
                 'code': str(o.code),
                 'duration': o.duration,
-                'price': o.price,
+                'owner': o.owner,
                 "rating": o.rating,
-                "longitude": o.longitude,
+                "name": o.name,
             }
             return to_serialize
         except AttributeError:

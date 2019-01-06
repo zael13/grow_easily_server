@@ -14,32 +14,32 @@ def domain_recipes():
     recipe_1 = Recipe(
         code=uuid.uuid4(),
         duration=215,
-        price=39,
-        longitude=-0.09998975,
+        owner=39,
+        name=-0.09998975,
         rating=51.75436293,
     )
 
     recipe_2 = Recipe(
         code=uuid.uuid4(),
         duration=405,
-        price=66,
-        longitude=0.18228006,
+        owner=66,
+        name=0.18228006,
         rating=51.74640997,
     )
 
     recipe_3 = Recipe(
         code=uuid.uuid4(),
         duration=56,
-        price=60,
-        longitude=0.27891577,
+        owner=60,
+        name=0.27891577,
         rating=51.45994069,
     )
 
     recipe_4 = Recipe(
         code=uuid.uuid4(),
         duration=93,
-        price=48,
-        longitude=0.33894476,
+        owner=48,
+        name=0.33894476,
         rating=51.39916678,
     )
 

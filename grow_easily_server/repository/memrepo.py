@@ -19,9 +19,9 @@ class MemRepo:
 
         operator = '__{}__'.format(operator)
 
-        if key in ['duration', 'price']:
+        if key in ['duration', 'owner']:
             return getattr(element[key], operator)(int(value))
-        elif key in ['rating', 'longitude']:
+        elif key in ['rating', 'name']:
             return getattr(element[key], operator)(float(value))
 
         return getattr(element[key], operator)(value)

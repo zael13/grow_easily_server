@@ -11,20 +11,14 @@ from grow_easily_server.domain.recipe import Recipe
 def test_serialize_domain_recipe():
     code = uuid.uuid4()
 
-    recipe = Recipe(
-        code=code,
-        duration=200,
-        price=10,
-        longitude=-0.09998975,
-        rating=51.75436293
-    )
+    recipe = Recipe(code=code, owner=10, name=-0.09998975, rating=51.75436293, duration=200)
 
     expected_json = """
         {{
             "code": "{}",
             "duration": 200,
-            "price": 10,
-            "longitude": -0.09998975,
+            "owner": 10,
+            "name": -0.09998975,
             "rating": 51.75436293
         }}
     """.format(code)

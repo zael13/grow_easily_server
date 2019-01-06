@@ -4,23 +4,18 @@ from grow_easily_server.domain.module import Trigger, Controller, PeriodicEvent
 
 class Recipe(object):
 
-    def __init__(self, code, duration, price, rating, longitude):
+    def __init__(self, code, owner, name, rating, duration):
         self.code = code
+        self.owner = owner
         self.duration = duration
-        self.price = price
         self.rating = rating
-        self.longitude = longitude
+        self.name = name
         self.items = []
 
     @classmethod
     def from_dict(cls, adict):
-        recipe = Recipe(
-            code=adict['code'],
-            duration=adict['duration'],
-            price=adict['price'],
-            rating=adict['rating'],
-            longitude=adict['longitude'],
-        )
+        recipe = Recipe(code=adict['code'], owner=adict['owner'], name=adict['name'], rating=adict['rating'],
+                        duration=adict['duration'])
 
         return recipe
 
@@ -28,9 +23,9 @@ class Recipe(object):
         return {
             'code': self.code,
             'duration': self.duration,
-            'price': self.price,
+            'owner': self.owner,
             'rating': self.rating,
-            'longitude': self.longitude,
+            'name': self.name,
         }
 
     def __eq__(self, other):
