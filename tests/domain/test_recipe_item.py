@@ -2,8 +2,9 @@ import uuid
 import pytest
 
 from datetime import datetime, time, timedelta
-from grow_easily_server.domain.RecipeItem import HWType, \
-    Event, Controller, CalendarEvent, DailyEvent, PeriodicEvent, Hardware
+from grow_easily_server.domain.module import HWType, \
+    Event, Controller, CalendarEvent, DailyEvent, PeriodicEvent,\
+    Hardware, Module
 
 TEST_DATE = datetime(2007, 12, 5, 22, 30)
 ONE_DAY = timedelta(days=1)
@@ -83,3 +84,51 @@ def test_hardware_should_set_all_internal_values_according_init_arguments():
     assert (hw.name == "test module")
     assert (hw.hw_type == HWType.DHT_TEMPERATURE)
     assert (hw.pins == [1, 2, 16])
+
+
+def test_module_item_should_raise_an_exception_if_name_is_not_string_type():
+    hw = Hardware(uuid.uuid4(), "test module", HWType.DHT_TEMPERATURE, [1, 2, 16])
+    event = PeriodicEvent(HWType.DHT_TEMPERATURE, TEST_TIME)
+    with pytest.raises(TypeError):
+        Module(uuid.uuid4(), 1, event, hw)
+
+
+def test_module_item_should_raise_an_exception_if_name_is_empty():
+    hw = Hardware(uuid.uuid4(), "test module", HWType.DHT_TEMPERATURE, [1, 2, 16])
+    event = PeriodicEvent(HWType.DHT_TEMPERATURE, TEST_TIME)
+    with pytest.raises(ValueError):
+        Module(uuid.uuid4(), "", event, hw)
+
+
+def test_module_item_should_raise_an_exception_if_event_is_wrong_type():
+    hw = Hardware(uuid.uuid4(), "test module", HWType.DHT_TEMPERATURE, [1, 2, 16])
+    with pytest.raises(TypeError):
+        Module(uuid.uuid4(), "test module", 1, hw)
+
+
+def test_module_item_should_raise_an_exception_if_hardware_is_wrong_type():
+    event = PeriodicEvent(HWType.DHT_TEMPERATURE, TEST_TIME)
+    with pytest.raises(TypeError):
+        Module(uuid.uuid4(), "test module", event, "hw")
+
+
+def test_module_item_should_raise_an_exception_if_data_type_is_not_type():
+        event = PeriodicEvent(HWType.DHT_TEMPERATURE, TEST_TIME)
+        hw = Hardware(uuid.uuid4(), "test module", HWType.DHT_TEMPERATURE, [1, 2, 16])
+
+        with pytest.raises(TypeError):
+            Module(uuid.uuid4(), "test module", event, hw, "string")
+
+
+def test_module_should_set_all_internal_values_according_init_arguments():
+    code = uuid.uuid4()
+    event = PeriodicEvent(HWType.DHT_TEMPERATURE, TEST_TIME)
+    hw = Hardware(uuid.uuid4(), "test module", HWType.DHT_TEMPERATURE, [1, 2, 16])
+    m = Module(code, "test module", event, hw, type(1))
+
+    assert (m.code == code)
+    assert (m.name == "test module")
+    assert (m.trigger == event)
+    assert (m.hardware == hw)
+    assert (m.data_type == type(1))
+

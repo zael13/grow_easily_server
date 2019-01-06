@@ -3,7 +3,7 @@ import uuid
 from grow_easily_server.domain.recipe import Recipe
 
 from datetime import datetime, time, timedelta
-from grow_easily_server.domain.RecipeItem import HWType, \
+from grow_easily_server.domain.module import HWType, \
     Event, Controller, CalendarEvent, DailyEvent, PeriodicEvent
 
 TEST_DATE = datetime(2007, 12, 5, 22, 30)
