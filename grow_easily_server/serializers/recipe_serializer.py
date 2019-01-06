@@ -11,6 +11,7 @@ class RecipeEncoder(json.JSONEncoder):
                 'owner': o.owner,
                 "rating": o.rating,
                 "name": o.name,
+                'items': ''.join(o.items)
             }
             return to_serialize
         except AttributeError:

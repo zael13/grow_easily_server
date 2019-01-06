@@ -11,7 +11,7 @@ from grow_easily_server.domain.recipe import Recipe
 def test_serialize_domain_recipe():
     code = uuid.uuid4()
 
-    recipe = Recipe(code=code, owner=10, name=-0.09998975, rating=51.75436293, duration=200)
+    recipe = Recipe(code=code, owner=10, name=-0.09998975, duration=200, rating=51.75436293, items=['1'])
 
     expected_json = """
         {{
@@ -19,13 +19,16 @@ def test_serialize_domain_recipe():
             "duration": 200,
             "owner": 10,
             "name": -0.09998975,
-            "rating": 51.75436293
+            "rating": 51.75436293,
+            "items": "1"
         }}
     """.format(code)
 
     json_recipe = json.dumps(recipe, cls=srs.RecipeEncoder)
 
-    assert json.loads(json_recipe) == json.loads(expected_json)
+    j1 = json.loads(json_recipe)
+    j2 = json.loads(expected_json)
+    assert j1 == j2
 
 
 def test_serialize_domain_recipe_wrong_type():

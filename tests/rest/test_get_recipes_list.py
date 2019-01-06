@@ -9,7 +9,8 @@ recipe1_dict = {
     'duration': 200,
     'owner': 10,
     'name': -0.09998975,
-    'rating': 51.75436293
+    'rating': 51.75436293,
+    'items': ''
 }
 
 recipe1_domain_model = Recipe.from_dict(recipe1_dict)

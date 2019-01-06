@@ -15,6 +15,7 @@ def recipe_dicts():
             'owner': 39,
             'name': -0.09998975,
             'rating': 51.75436293,
+            'items': '',
         },
         {
             'code': 'fe2c3195-aeff-487a-a08f-e0bdc0ec6e9a',
@@ -22,6 +23,7 @@ def recipe_dicts():
             'owner': 66,
             'name': 0.18228006,
             'rating': 51.74640997,
+            'items': '',
         },
         {
             'code': '913694c6-435a-4366-ba0d-da5334a611b2',
@@ -29,6 +31,7 @@ def recipe_dicts():
             'owner': 60,
             'name': 0.27891577,
             'rating': 51.45994069,
+            'items': '',
         },
         {
             'code': 'eed76e77-55c1-41ce-985d-ca49bf6c0585',
@@ -36,6 +39,7 @@ def recipe_dicts():
             'owner': 48,
             'name': 0.33894476,
             'rating': 51.39916678,
+            'items': '',
         }
     ]
 
