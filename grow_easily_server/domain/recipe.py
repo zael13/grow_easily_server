@@ -1,5 +1,5 @@
 from grow_easily_server.shared.domain_model import DomainModel
-from grow_easily_server.domain.module import Trigger, Controller, PeriodicEvent
+from grow_easily_server.domain.module import Module, Trigger, Controller, PeriodicEvent
 
 
 class Recipe(object):
@@ -10,11 +10,11 @@ class Recipe(object):
         self.name = name
         self.duration = duration
         self.rating = rating
+        self.items = []
 
         if items:
-            self.items = items
-        else:
-            self.items = []
+            for i in items:
+                self.add_item(i)
 
 
     @classmethod
@@ -38,7 +38,7 @@ class Recipe(object):
         return self.to_dict() == other.to_dict()
 
     def add_item(self, item):
-        if issubclass(type(item), Trigger):
+        if issubclass(type(item), Module):
             if not self.__is_duplicate_and_substituted(item) and \
                     not self.__is_such_controller_exist(item):
                 self.items.append(item)

@@ -4,14 +4,29 @@ from unittest import mock
 from grow_easily_server.domain.recipe import Recipe
 from grow_easily_server.shared import response_object as res
 
+
+from grow_easily_server.serializers import recipe_serializer as srs
+from grow_easily_server.domain.module import PeriodicEvent, Hardware, HWType, Module
+from datetime import timedelta
+import uuid
+item = Module(uuid.uuid4(),
+              "test module",
+              PeriodicEvent(HWType.DHT_TEMPERATURE, timedelta(hours=5)),
+              Hardware(uuid.uuid4(), "test hw", HWType.DHT_TEMPERATURE, [1, 2, 16]),
+              type(1))
+
+
 recipe1_dict = {
     'code': '3251a5bd-86be-428d-8ae9-6e51a8048c33',
     'duration': 200,
     'owner': 10,
     'name': -0.09998975,
     'rating': 51.75436293,
-    'items': ''
+    'items': [item]
 }
+
+
+json_recipe = json.dumps(recipe1_dict, cls=srs.RecipeEncoder)
 
 recipe1_domain_model = Recipe.from_dict(recipe1_dict)
 
@@ -26,7 +41,7 @@ def test_get(mock_use_case, client):
     http_response = client.get('/find_recipe')
 
     assert json.loads(http_response.data.decode(
-        'UTF-8')) == [recipe1_dict]
+        'UTF-8')) == [json.loads(json_recipe)]
     assert http_response.status_code == 200
     assert http_response.mimetype == 'application/json'
 

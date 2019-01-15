@@ -6,12 +6,19 @@ import pytest
 
 from grow_easily_server.serializers import recipe_serializer as srs
 from grow_easily_server.domain.recipe import Recipe
-
+from grow_easily_server.domain.module import PeriodicEvent, Hardware, HWType, Module
+from datetime import timedelta
 
 def test_serialize_domain_recipe():
     code = uuid.uuid4()
 
-    recipe = Recipe(code=code, owner=10, name=-0.09998975, duration=200, rating=51.75436293, items=['1'])
+    item = Module(uuid.uuid4(),
+                  "test module",
+                  PeriodicEvent(HWType.DHT_TEMPERATURE, timedelta(hours=5)),
+                  Hardware(uuid.uuid4(), "test hw", HWType.DHT_TEMPERATURE, [1, 2, 16]),
+                  type(1))
+
+    recipe = Recipe(code=code, owner=10, name=-0.09998975, duration=200, rating=51.75436293, items=None)
 
     expected_json = """
         {{
@@ -20,9 +27,9 @@ def test_serialize_domain_recipe():
             "owner": 10,
             "name": -0.09998975,
             "rating": 51.75436293,
-            "items": "1"
+            "items": {}
         }}
-    """.format(code)
+    """.format(code, [])
 
     json_recipe = json.dumps(recipe, cls=srs.RecipeEncoder)
 

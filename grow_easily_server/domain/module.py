@@ -1,4 +1,4 @@
-from datetime import datetime, time
+from datetime import datetime, timedelta, time
 from enum import Enum
 
 
@@ -53,16 +53,16 @@ class Controller(Trigger):
 class Event(Trigger):
     def __init__(self, item_type, duration):
         Trigger.__init__(self, item_type)
-        if type(duration) is not time and duration != 0:
-            raise TypeError("Duration should be passed as time object or zero")
+        if type(duration) is not timedelta and duration != 0:
+            raise TypeError("Duration should be passed as timedelta object or zero")
         self.duration = duration
 
 
 class PeriodicEvent(Event):
-    def __init__(self, item_type, period, duration=0):
+    def __init__(self, item_type, period, duration=timedelta(seconds=0)):
         Event.__init__(self, item_type, duration)
-        if type(period) is not time:
-            raise TypeError("period should be passed as time object")
+        if type(period) is not timedelta:
+            raise TypeError("period should be passed as timedelta object")
         self.period = period
 
 

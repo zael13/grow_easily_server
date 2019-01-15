@@ -33,8 +33,8 @@ def test_event_should_raise_an_exception_if_not_time_object_used_for_duration():
 
 
 def test_periodic_event_should_store_correct_periodic_event():
-    pe = PeriodicEvent(HWType.DHT_TEMPERATURE, TEST_TIME)
-    assert (pe.period == TEST_TIME)
+    pe = PeriodicEvent(HWType.DHT_TEMPERATURE, ONE_HOUR)
+    assert (pe.period == ONE_HOUR)
 
 
 # def test_hardware_should_raise_an_exception_if_code_is_not_uuid():
@@ -88,14 +88,14 @@ def test_hardware_should_set_all_internal_values_according_init_arguments():
 
 def test_module_item_should_raise_an_exception_if_name_is_not_string_type():
     hw = Hardware(uuid.uuid4(), "test module", HWType.DHT_TEMPERATURE, [1, 2, 16])
-    event = PeriodicEvent(HWType.DHT_TEMPERATURE, TEST_TIME)
+    event = PeriodicEvent(HWType.DHT_TEMPERATURE, ONE_HOUR)
     with pytest.raises(TypeError):
         Module(uuid.uuid4(), 1, event, hw)
 
 
 def test_module_item_should_raise_an_exception_if_name_is_empty():
     hw = Hardware(uuid.uuid4(), "test module", HWType.DHT_TEMPERATURE, [1, 2, 16])
-    event = PeriodicEvent(HWType.DHT_TEMPERATURE, TEST_TIME)
+    event = PeriodicEvent(HWType.DHT_TEMPERATURE, ONE_HOUR)
     with pytest.raises(ValueError):
         Module(uuid.uuid4(), "", event, hw)
 
@@ -107,13 +107,13 @@ def test_module_item_should_raise_an_exception_if_event_is_wrong_type():
 
 
 def test_module_item_should_raise_an_exception_if_hardware_is_wrong_type():
-    event = PeriodicEvent(HWType.DHT_TEMPERATURE, TEST_TIME)
+    event = PeriodicEvent(HWType.DHT_TEMPERATURE, ONE_HOUR)
     with pytest.raises(TypeError):
         Module(uuid.uuid4(), "test module", event, "hw")
 
 
 def test_module_item_should_raise_an_exception_if_data_type_is_not_type():
-        event = PeriodicEvent(HWType.DHT_TEMPERATURE, TEST_TIME)
+        event = PeriodicEvent(HWType.DHT_TEMPERATURE, ONE_HOUR)
         hw = Hardware(uuid.uuid4(), "test module", HWType.DHT_TEMPERATURE, [1, 2, 16])
 
         with pytest.raises(TypeError):
@@ -122,9 +122,14 @@ def test_module_item_should_raise_an_exception_if_data_type_is_not_type():
 
 def test_module_should_set_all_internal_values_according_init_arguments():
     code = uuid.uuid4()
-    event = PeriodicEvent(HWType.DHT_TEMPERATURE, TEST_TIME)
+    event = PeriodicEvent(HWType.DHT_TEMPERATURE, ONE_HOUR)
     hw = Hardware(uuid.uuid4(), "test module", HWType.DHT_TEMPERATURE, [1, 2, 16])
     m = Module(code, "test module", event, hw, type(1))
+
+    print("Test 1")
+    print(m)
+    print("Test 2")
+    print([m, m])
 
     assert (m.code == code)
     assert (m.name == "test module")
