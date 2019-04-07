@@ -18,7 +18,6 @@ class User:
                     age=adict['age'], gender=adict['gender'], rating=adict['rating'])
         return user
 
-
     def to_dict(self):
         return {
             'code': self.code,
@@ -32,3 +31,7 @@ class User:
             'gender': self.gender,
             'rating': self.rating
     }
+
+    def __eq__(self, other):
+        return self.to_dict() == other.to_dict()
+

@@ -1,8 +1,7 @@
 import uuid
-import pytest
-
-from grow_easily_server.domain.user import User
 from datetime import datetime
+from grow_easily_server.domain.user import User
+
 TEST_DATE = datetime(2007, 12, 5, 22, 30)
 
 
@@ -53,7 +52,7 @@ def test_user_model_from_dict():
     assert user.rating is None
 
 
-def test_recipe_model_to_dict():
+def test_user_model_to_dict():
     user_dict = {
             'code': uuid.uuid4(),
             'name': 'Ivan',
@@ -65,8 +64,27 @@ def test_recipe_model_to_dict():
             'age': 20,
             'gender': 'male',
             'rating': None
-        }
+    }
 
     user = User.from_dict(user_dict)
 
     assert user.to_dict() == user_dict
+
+def test_user_model_comparison():
+    user_dict = {
+            'code': uuid.uuid4(),
+            'name': 'Ivan',
+            'surname': 'Ivanov',
+            'email': 'ivan@gmail.com',
+            'password': '123456',
+            'reg_date': TEST_DATE,
+            'mobile': '12345678',
+            'age': 20,
+            'gender': 'male',
+            'rating': None
+    }
+
+    user1 = User.from_dict(user_dict)
+    user2 = User.from_dict(user_dict)
+
+    assert user1 == user2
