@@ -44,3 +44,4 @@ class Dynamodb:
         if not isinstance(item, self.db_objects_type):
             raise TypeError('item is not of type %s' % self.db_objects_type)
         self.table.put_item(Item=self.db_objects_type.to_dict(item))
+
