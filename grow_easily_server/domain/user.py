@@ -1,3 +1,6 @@
+from grow_easily_server.shared.domain_model import DomainModel
+
+
 class User:
     def __init__(self, code, name, surname, email, password, reg_date, mobile=None, age=None, gender=None, rating=None):
         self.code = code
@@ -35,3 +38,5 @@ class User:
     def __eq__(self, other):
         return self.to_dict() == other.to_dict()
 
+
+DomainModel.register(User)
