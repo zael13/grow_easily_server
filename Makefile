@@ -58,6 +58,8 @@ test: ## run tests quickly with the default Python
 
 test-all: ## run tests on every Python version with tox
 	tox
+cov: ## run pytest coverage
+	pytest --cov=grow_easily_server tests
 
 coverage: ## check code coverage quickly with the default Python
 	coverage run --source grow_easily_server setup.py test
