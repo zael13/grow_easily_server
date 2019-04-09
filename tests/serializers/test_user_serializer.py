@@ -25,7 +25,7 @@ def test_serialize_domain_user():
             "surname": "Ivanov",
             "email": "ivan@gmail.com",
             "password": "123456",
-            "reg_date": 1196886600.0,
+            "reg_date": 1196890200.0,
             "mobile": "12345678",
             "age": 20,
             "gender": "male",
