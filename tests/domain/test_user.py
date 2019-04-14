@@ -88,3 +88,28 @@ def test_user_model_comparison():
     user2 = User.from_dict(user_dict)
 
     assert user1 == user2
+
+
+def test_user_model_from_partial_dict():
+    code = uuid.uuid4()
+    user = User.from_dict(
+        {
+            'code': code,
+            'name': 'Ivan',
+            'surname': 'Ivanov',
+            'email': 'ivan@gmail.com',
+            'password': '123456',
+            'reg_date': TEST_DATE.timestamp(),
+        }
+    )
+
+    assert user.code == code
+    assert user.name == "Ivan"
+    assert user.surname == "Ivanov"
+    assert user.email == "ivan@gmail.com"
+    assert user.password == "123456"
+    assert user.reg_date == TEST_DATE.timestamp()
+    assert user.mobile is None
+    assert user.age is None
+    assert user.gender is None
+    assert user.rating is None
