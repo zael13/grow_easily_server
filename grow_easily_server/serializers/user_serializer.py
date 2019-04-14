@@ -1,5 +1,6 @@
 import json
 from grow_easily_server.domain.user import User
+import decimal
 
 
 class UserEncoder(json.JSONEncoder):
@@ -12,71 +13,20 @@ class UserEncoder(json.JSONEncoder):
                     'surname': o.surname,
                     'email': o.email,
                     'password': o.password,
-                    'reg_date': o.reg_date.timestamp(),
+                    'reg_date': o.reg_date,
                     'mobile': o.mobile,
                     'age': o.age,
                     'gender': o.gender,
                     'rating': str(o.rating)
                 }
+                print(to_serialize)
+            elif isinstance(o, decimal.Decimal):
+                if abs(o) % 1 > 0:
+                    return float(o)
+                else:
+                    return int(o)
             else:
                 to_serialize = super().default(o)
             return to_serialize
         except AttributeError:
             return super().default(o)
-
-
-
-
-
-
-# table = dynamodb.create_table(
-#     TableName='User',
-#     KeySchema=[
-#         {
-#             'AttributeName': 'code',
-#             'KeyType': 'HASH'  #Partition key
-#         },
-#         {
-#             'AttributeName': 'email',
-#             'KeyType': 'RANGE'  #Sort key
-#         }
-#     ],
-#     AttributeDefinitions=[
-#         {
-#             'AttributeName': 'name',
-#             'AttributeType': 'S'
-#         },
-#         {
-#             'AttributeName': 'surname',
-#             'AttributeType': 'S'
-#         },
-#         {
-#             'AttributeName': 'password',
-#             'AttributeType': 'S'
-#         },
-#         {
-#             'AttributeName': 'age',
-#             'AttributeType': 'N'
-#         },
-#         {
-#             'AttributeName': 'gender',
-#             'AttributeType': 'S'
-#         },
-#         {
-#             'AttributeName': 'mobile',
-#             'AttributeType': 'S'
-#         },
-#         {
-#             'AttributeName': 'reg_date',
-#             'AttributeType': 'N'
-#         },
-#         {
-#             'AttributeName': 'rating',
-#             'AttributeType': 'N'
-#         }
-#     ],
-#     ProvisionedThroughput={
-#         'ReadCapacityUnits': 10,
-#         'WriteCapacityUnits': 10
-#     }
-# )
