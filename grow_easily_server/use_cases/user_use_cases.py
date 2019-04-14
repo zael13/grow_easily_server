@@ -22,7 +22,7 @@ class UserAddUseCase(uc.UseCase):
         domain_item = self.repo.list(filters={'email': request_object.filters['email']})
         if not domain_item:
             self.repo.insert(user.User.from_dict(request_object.filters))
-            return res.ResponseSuccess()
+            return res.ResponseSuccess(value="User has been successfully created")
 
         return res.ResponseFailure(type_=res.ResponseFailure.PARAMETERS_ERROR,
                                    message="Such user is already exist")
