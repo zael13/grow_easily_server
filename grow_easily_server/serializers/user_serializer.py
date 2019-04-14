@@ -19,12 +19,6 @@ class UserEncoder(json.JSONEncoder):
                     'gender': o.gender,
                     'rating': str(o.rating)
                 }
-                print(to_serialize)
-            elif isinstance(o, decimal.Decimal):
-                if abs(o) % 1 > 0:
-                    return float(o)
-                else:
-                    return int(o)
             else:
                 to_serialize = super().default(o)
             return to_serialize
