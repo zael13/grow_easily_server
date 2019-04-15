@@ -22,6 +22,11 @@ def test_daily_event_should_raise_an_exception_if_not_time_object_used():
         DailyEvent(HWType.DHT_TEMPERATURE, "fake_item")
 
 
+def test_daily_event_should_store_correct_daily_event():
+    de = DailyEvent(HWType.DHT_TEMPERATURE, TEST_TIME)
+    assert (de.day_time == TEST_TIME)
+
+
 def test_periodic_event_should_raise_an_exception_if_not_time_object_used():
     with pytest.raises(TypeError):
         PeriodicEvent(HWType.DHT_TEMPERATURE, "fake_item")
@@ -35,6 +40,11 @@ def test_event_should_raise_an_exception_if_not_time_object_used_for_duration():
 def test_periodic_event_should_store_correct_periodic_event():
     pe = PeriodicEvent(HWType.DHT_TEMPERATURE, ONE_HOUR)
     assert (pe.period == ONE_HOUR)
+
+
+def test_controller_event_should_store_correct_value():
+    c = Controller(HWType.DHT_TEMPERATURE, 20)
+    assert (c.value == 20)
 
 
 # def test_hardware_should_raise_an_exception_if_code_is_not_uuid():

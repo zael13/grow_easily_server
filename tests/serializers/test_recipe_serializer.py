@@ -41,3 +41,16 @@ def test_serialize_domain_recipe():
 def test_serialize_domain_recipe_wrong_type():
     with pytest.raises(TypeError):
         json.dumps(datetime.datetime.now(), cls=srs.RecipeEncoder)
+
+
+def test_serialize_domain_recipe():
+    item = Module(uuid.uuid4(),
+                  "test module",
+                  PeriodicEvent(HWType.DHT_TEMPERATURE, timedelta(hours=5)),
+                  Hardware(uuid.uuid4(), "test hw", HWType.DHT_TEMPERATURE, [1, 2, 16]),
+                  type(1))
+
+    delattr(item, 'name')
+
+    with pytest.raises(TypeError):
+        json.dumps(item, cls=srs.RecipeEncoder)

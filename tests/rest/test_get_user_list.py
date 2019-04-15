@@ -74,3 +74,14 @@ def test_request_object_initialisation_and_use_with_filters(
         {'filters': {'param1': 'value1', 'param2': 'value2'}}
     )
     mock_use_case().execute.assert_called_with(internal_request_object)
+
+
+@mock.patch(
+    'grow_easily_server.use_cases.user_use_cases.UserAddUseCase')
+def test_get_add_user(mock_use_case, client):
+    mock_use_case().execute.return_value = res.ResponseSuccess("User has been successfully created")
+
+    http_response = client.get('/add_user')
+
+    assert http_response.status_code == 200
+    assert http_response.mimetype == 'application/json'

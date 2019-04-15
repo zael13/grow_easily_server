@@ -43,3 +43,15 @@ def test_serialize_domain_user():
 def test_serialize_domain_user_wrong_type():
     with pytest.raises(TypeError):
         json.dumps(datetime.now(), cls=srs.UserEncoder)
+
+
+def test_serialize_domain_user():
+    user = User(uuid.uuid4(), name="Ivan", surname="Ivanov", email="ivan@gmail.com",
+                password="123456", reg_date=TEST_DATE.timestamp(), mobile="12345678",
+                age=20, gender="male")
+
+    delattr(user, 'gender')
+
+    with pytest.raises(TypeError):
+        json.dumps(user, cls=srs.UserEncoder)
+

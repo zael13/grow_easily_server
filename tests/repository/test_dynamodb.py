@@ -95,6 +95,15 @@ def test_repository_list_with_filters_email(recipe_dicts):
     )
 
 
+def test_repository_list_with_wrong_item_type(recipe_dicts):
+    repo = dynamodb.Dynamodb(User)
+    for i in recipe_dicts:
+        repo.insert(User.from_dict(i))
+
+    with pytest.raises(TypeError):
+        repo.insert("error")
+
+
 # def test_repository_list_with_filters_unknown_operator(recipe_dicts):
 #     repo = dynamodb.Dynamodb(User)
 #

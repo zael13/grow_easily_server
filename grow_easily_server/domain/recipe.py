@@ -39,23 +39,17 @@ class Recipe(object):
 
     def add_item(self, item):
         if issubclass(type(item), Module):
-            if not self.__is_duplicate_and_substituted(item) and \
-                    not self.__is_such_controller_exist(item):
+            if not self.__is_duplicate_and_substituted(item):
                 self.items.append(item)
         else:
             raise TypeError("new item should be passed as RecipeItem object")
 
     def __is_duplicate_and_substituted(self, item):
-        if type(item) is Controller or type(item) is PeriodicEvent:
+        if type(item.trigger) is Controller or type(item.trigger) is PeriodicEvent:
             for n, i in enumerate(self.items):
-                if type(i) is type(item) and item.hw_type is i.hw_type:
+                if type(i.hardware) is type(item.hardware) and item.hardware.hw_type is i.hardware.hw_type:
                     self.items[n] = item
                     return True
-
-    def __is_such_controller_exist(self, item):
-        for n, i in enumerate(self.items):
-            if item.hw_type is i.hw_type and type(i) is Controller:
-                return True
 
     def get_items(self):
         return self.items

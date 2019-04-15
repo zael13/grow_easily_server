@@ -4,7 +4,7 @@ from grow_easily_server.domain.recipe import Recipe
 
 from datetime import datetime, time, timedelta
 from grow_easily_server.domain.module import HWType, \
-    Event, Controller, CalendarEvent, DailyEvent, PeriodicEvent
+    Event, Controller, CalendarEvent, DailyEvent, PeriodicEvent, Module, Hardware
 
 TEST_DATE = datetime(2007, 12, 5, 22, 30)
 ONE_DAY = timedelta(days=1)
@@ -108,13 +108,19 @@ def test_add_string_item_should_raise_the_wrong_type_exception():
         recipe.add_item("string")
 
 
-# def test_add_the_controller_of_the_same_type_twice_should_substitute_old_value_with_new():
-#     recipe = Recipe(uuid.uuid4(), owner=10, name=-0.09998975, duration=200, rating=51.75436293)
-#     recipe.add_item(Controller(HWType.DHT_TEMPERATURE, 1))
-#     recipe.add_item(Controller(HWType.DHT_TEMPERATURE, 2))
-#     assert(len(recipe.get_items()) == 1)
-#     assert(recipe.items[0].value == 2)
+def test_add_the_controller_of_the_same_type_twice_should_substitute_old_value_with_new():
+    recipe = Recipe(uuid.uuid4(), owner=10, name=-0.09998975, duration=200, rating=51.75436293)
+    hw = Hardware(uuid.uuid4(), "Temperature", HWType.DHT_TEMPERATURE, [1, 2, 16])
+    m1 = Module(uuid.uuid4(), "Temperature", Controller(HWType.DHT_TEMPERATURE, 1), hw, int)
+    m2 = Module(uuid.uuid4(), "Temperature", CalendarEvent(HWType.DHT_HUMIDITY, TEST_DATE), hw, int)
+    m3 = Module(uuid.uuid4(), "Temperature", Controller(HWType.DHT_TEMPERATURE, 2), hw, int)
 
+    recipe.add_item(m1)
+    recipe.add_item(m2)
+    recipe.add_item(m3)
+
+    assert(len(recipe.get_items()) == 2)
+    assert(recipe.items[0].trigger.value == 2)
 
 # def test_add_the_calendar_event_of_the_same_type_twice_should_not_substitute_old_value():
 #     recipe = Recipe(uuid.uuid4(), owner=10, name=-0.09998975, duration=200, rating=51.75436293)
