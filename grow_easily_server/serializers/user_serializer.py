@@ -1,5 +1,6 @@
 import json
 from grow_easily_server.domain.user import User
+import decimal
 
 
 class UserEncoder(json.JSONEncoder):
@@ -18,8 +19,11 @@ class UserEncoder(json.JSONEncoder):
                     'gender': o.gender,
                     'rating': str(o.rating)
                 }
-            else:
-                to_serialize = super().default(o)
+            elif isinstance(o, decimal.Decimal):
+                if o % 1 == 0:
+                    return int(o)
+                else:
+                    return float(o)
             return to_serialize
         except AttributeError:
             return super().default(o)
