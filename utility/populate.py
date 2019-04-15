@@ -34,7 +34,7 @@ userTable.put_item(
         'userId': str(maxId),
 		'name': "Max",
 		'surname': "Some surname",
-		'email': "diana.sukhinina1@gmail.com",
+		'email': "max.zastavny@gmail.com",
 		'password': "123456",
 		'reg_date': 1555331630,
 		'mobile': None,
