@@ -1,8 +1,6 @@
 import pytest
 
-from grow_easily_server.domain.recipe import Recipe
 from grow_easily_server.shared.domain_model import DomainModel
-
 from grow_easily_server.repository import memrepo
 
 

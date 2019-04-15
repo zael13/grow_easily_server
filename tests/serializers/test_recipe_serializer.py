@@ -9,16 +9,12 @@ from grow_easily_server.domain.recipe import Recipe
 from grow_easily_server.domain.module import PeriodicEvent, Hardware, HWType, Module
 from datetime import timedelta
 
+
 def test_serialize_domain_recipe():
     code = uuid.uuid4()
 
-    item = Module(uuid.uuid4(),
-                  "test module",
-                  PeriodicEvent(HWType.DHT_TEMPERATURE, timedelta(hours=5)),
-                  Hardware(uuid.uuid4(), "test hw", HWType.DHT_TEMPERATURE, [1, 2, 16]),
-                  type(1))
-
-    recipe = Recipe(code=code, owner=10, name=-0.09998975, duration=200, rating=51.75436293, items=None)
+    recipe = Recipe(code=code, owner=10, name=-0.09998975,
+                    duration=200, rating=51.75436293, items=None)
 
     expected_json = """
         {{
@@ -43,7 +39,7 @@ def test_serialize_domain_recipe_wrong_type():
         json.dumps(datetime.datetime.now(), cls=srs.RecipeEncoder)
 
 
-def test_serialize_domain_recipe():
+def test_serialize_domain_recipe_with_wrong_type():
     item = Module(uuid.uuid4(),
                   "test module",
                   PeriodicEvent(HWType.DHT_TEMPERATURE, timedelta(hours=5)),

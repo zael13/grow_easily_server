@@ -2,7 +2,8 @@ from grow_easily_server.shared.domain_model import DomainModel
 
 
 class User:
-    def __init__(self, code, name, surname, email, password, reg_date, mobile=None, age=None, gender=None, rating=None):
+    def __init__(self, code, name, surname, email, password, reg_date,
+                 mobile=None, age=None, gender=None, rating=None):
         self.code = code
         self.name = name
         self.surname = surname
@@ -14,10 +15,10 @@ class User:
         self.gender = gender
         self.rating = rating
 
-
     @classmethod
     def from_dict(cls, adict):
-        user = User(code=adict['code'], name=adict['name'], surname=adict['surname'], email=adict['email'],
+        user = User(code=adict['code'], name=adict['name'],
+                    surname=adict['surname'], email=adict['email'],
                     password=adict['password'], reg_date=adict['reg_date'],
                     mobile=adict['mobile'] if ('mobile' in adict) else None,
                     age=adict['age'] if ('age' in adict) else None,
@@ -37,7 +38,7 @@ class User:
             'age': self.age,
             'gender': self.gender,
             'rating': self.rating
-    }
+        }
 
     def __eq__(self, other):
         return self.to_dict() == other.to_dict()

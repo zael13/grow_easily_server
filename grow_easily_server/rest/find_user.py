@@ -31,7 +31,6 @@ def parse_request_object():
     return req.RecipeListRequestObject.from_dict(qrystr_params)
 
 
-
 @blueprint.route('/find_user', methods=['GET'])
 def find_user():
     request_object = parse_request_object()

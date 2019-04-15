@@ -185,5 +185,3 @@ def test_repository_list_with_wrong_item_type(recipe_dicts):
 #         repo.list(filters={'rating': 51.39916678}),
 #         [recipe_dicts[3]]
 #     )
-
-

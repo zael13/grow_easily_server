@@ -1,7 +1,7 @@
 import json
 from grow_easily_server.domain.recipe import Recipe
-from grow_easily_server.domain.module import Module, Hardware, Event, PeriodicEvent, HWType
-from datetime import datetime, date, time
+from grow_easily_server.domain.module import Module, Hardware, PeriodicEvent, HWType
+
 
 class RecipeEncoder(json.JSONEncoder):
     def default(self, o):
@@ -38,7 +38,7 @@ class RecipeEncoder(json.JSONEncoder):
                     'duration': str(int(o.duration.total_seconds()))
                 }
             elif isinstance(o, HWType):
-                to_serialize = str(o.name)#{'hw_type': str(o.name)}
+                to_serialize = str(o.name)  # {'hw_type': str(o.name)}
             else:
                 to_serialize = super().default(o)
             return to_serialize

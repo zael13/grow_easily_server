@@ -123,11 +123,11 @@ def test_module_item_should_raise_an_exception_if_hardware_is_wrong_type():
 
 
 def test_module_item_should_raise_an_exception_if_data_type_is_not_type():
-        event = PeriodicEvent(HWType.DHT_TEMPERATURE, ONE_HOUR)
-        hw = Hardware(uuid.uuid4(), "test module", HWType.DHT_TEMPERATURE, [1, 2, 16])
+    event = PeriodicEvent(HWType.DHT_TEMPERATURE, ONE_HOUR)
+    hw = Hardware(uuid.uuid4(), "test module", HWType.DHT_TEMPERATURE, [1, 2, 16])
 
-        with pytest.raises(TypeError):
-            Module(uuid.uuid4(), "test module", event, hw, "string")
+    with pytest.raises(TypeError):
+        Module(uuid.uuid4(), "test module", event, hw, "string")
 
 
 def test_module_should_set_all_internal_values_according_init_arguments():
@@ -145,5 +145,4 @@ def test_module_should_set_all_internal_values_according_init_arguments():
     assert (m.name == "test module")
     assert (m.trigger == event)
     assert (m.hardware == hw)
-    assert (m.data_type == type(1))
-
+    assert (isinstance(m.data_type, int))

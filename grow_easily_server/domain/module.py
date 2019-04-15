@@ -12,7 +12,6 @@ class Module:
         self.hardware = hardware
         self.data_type = data_type
 
-
     @staticmethod
     def __check_input_values(name, trigger, hardware, data_type):
         if type(name) is not str:

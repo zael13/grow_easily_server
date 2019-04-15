@@ -1,6 +1,5 @@
 import json
 from grow_easily_server.domain.user import User
-import decimal
 
 
 class UserEncoder(json.JSONEncoder):

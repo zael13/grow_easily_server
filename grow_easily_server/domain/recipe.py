@@ -1,5 +1,5 @@
 from grow_easily_server.shared.domain_model import DomainModel
-from grow_easily_server.domain.module import Module, Trigger, Controller, PeriodicEvent
+from grow_easily_server.domain.module import Module, Controller, PeriodicEvent
 
 
 class Recipe(object):
@@ -16,11 +16,14 @@ class Recipe(object):
             for i in items:
                 self.add_item(i)
 
-
     @classmethod
     def from_dict(cls, adict):
-        recipe = Recipe(code=adict['code'], owner=adict['owner'], name=adict['name'], duration=adict['duration'],
-                        rating=adict['rating'], items=adict['items'])
+        recipe = Recipe(code=adict['code'],
+                        owner=adict['owner'],
+                        name=adict['name'],
+                        duration=adict['duration'],
+                        rating=adict['rating'],
+                        items=adict['items'])
 
         return recipe
 
@@ -47,7 +50,8 @@ class Recipe(object):
     def __is_duplicate_and_substituted(self, item):
         if type(item.trigger) is Controller or type(item.trigger) is PeriodicEvent:
             for n, i in enumerate(self.items):
-                if type(i.hardware) is type(item.hardware) and item.hardware.hw_type is i.hardware.hw_type:
+                if isinstance(i.hardware, type(item.hardware)) and \
+                   item.hardware.hw_type is i.hardware.hw_type:
                     self.items[n] = item
                     return True
 

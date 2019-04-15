@@ -4,7 +4,7 @@ from grow_easily_server.domain.recipe import Recipe
 
 from datetime import datetime, time, timedelta
 from grow_easily_server.domain.module import HWType, \
-    Event, Controller, CalendarEvent, DailyEvent, PeriodicEvent, Module, Hardware
+    Controller, CalendarEvent, Module, Hardware
 
 TEST_DATE = datetime(2007, 12, 5, 22, 30)
 ONE_DAY = timedelta(days=1)
@@ -147,4 +147,4 @@ def test_add_the_controller_of_the_same_type_twice_should_substitute_old_value_w
 
 def test_generate_should_return_string():
     recipe = Recipe(uuid.uuid4(), owner=10, name=-0.09998975, duration=200, rating=51.75436293)
-    assert(type(recipe.generate()) == type(""))
+    assert(isinstance(recipe.generate(), str))

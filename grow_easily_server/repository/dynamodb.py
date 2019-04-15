@@ -6,7 +6,9 @@ from boto3.dynamodb.conditions import Key
 class Dynamodb:
     def __init__(self, db_objects_type):
         self.db_objects_type = db_objects_type
-        self.dynamodb = boto3.resource('dynamodb', endpoint_url='http://localhost:8000', region_name='us-west-2')
+        self.dynamodb = boto3.resource('dynamodb',
+                                       endpoint_url='http://localhost:8000',
+                                       region_name='us-west-2')
         self.table = self.dynamodb.Table(db_objects_type.__name__)
 
     def list(self, filters=None):
@@ -26,4 +28,3 @@ class Dynamodb:
         if not isinstance(item, self.db_objects_type):
             raise TypeError('item is not of type %s' % self.db_objects_type)
         self.table.put_item(Item=self.db_objects_type.to_dict(item))
-

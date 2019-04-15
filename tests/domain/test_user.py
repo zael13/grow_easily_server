@@ -54,34 +54,35 @@ def test_user_model_from_dict():
 
 def test_user_model_to_dict():
     user_dict = {
-            'code': uuid.uuid4(),
-            'name': 'Ivan',
-            'surname': 'Ivanov',
-            'email': 'ivan@gmail.com',
-            'password': '123456',
-            'reg_date': TEST_DATE,
-            'mobile': '12345678',
-            'age': 20,
-            'gender': 'male',
-            'rating': None
+        'code': uuid.uuid4(),
+        'name': 'Ivan',
+        'surname': 'Ivanov',
+        'email': 'ivan@gmail.com',
+        'password': '123456',
+        'reg_date': TEST_DATE,
+        'mobile': '12345678',
+        'age': 20,
+        'gender': 'male',
+        'rating': None
     }
 
     user = User.from_dict(user_dict)
 
     assert user.to_dict() == user_dict
 
+
 def test_user_model_comparison():
     user_dict = {
-            'code': uuid.uuid4(),
-            'name': 'Ivan',
-            'surname': 'Ivanov',
-            'email': 'ivan@gmail.com',
-            'password': '123456',
-            'reg_date': TEST_DATE,
-            'mobile': '12345678',
-            'age': 20,
-            'gender': 'male',
-            'rating': None
+        'code': uuid.uuid4(),
+        'name': 'Ivan',
+        'surname': 'Ivanov',
+        'email': 'ivan@gmail.com',
+        'password': '123456',
+        'reg_date': TEST_DATE,
+        'mobile': '12345678',
+        'age': 20,
+        'gender': 'male',
+        'rating': None
     }
 
     user1 = User.from_dict(user_dict)
