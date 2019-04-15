@@ -15,7 +15,7 @@ def test_serialize_domain_user():
     code = uuid.uuid4()
 
     user = User(code, name="Ivan", surname="Ivanov", email="ivan@gmail.com",
-                password="123456", reg_date=TEST_DATE, mobile="12345678",
+                password="123456", reg_date=TEST_DATE.timestamp(), mobile="12345678",
                 age=20, gender="male")
 
     expected_json = """

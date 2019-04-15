@@ -9,24 +9,6 @@ class Dynamodb:
         self.dynamodb = boto3.resource('dynamodb', endpoint_url='http://localhost:8000', region_name='us-west-2')
         self.table = self.dynamodb.Table(db_objects_type.__name__)
 
-    def _check(self, element, key, value):
-        if '__' not in key:
-            key = key + '__eq'
-
-        key, operator = key.split('__')
-
-        if operator not in ['eq', 'lt', 'gt']:
-            raise ValueError('Operator {} is not supported'.format(operator))
-
-        operator = '__{}__'.format(operator)
-
-        if key in ['duration', 'owner']:
-            return getattr(element[key], operator)(int(value))
-        elif key in ['rating', 'name']:
-            return getattr(element[key], operator)(float(value))
-
-        return getattr(element[key], operator)(value)
-
     def list(self, filters=None):
         if not filters:
             response = self.table.scan()

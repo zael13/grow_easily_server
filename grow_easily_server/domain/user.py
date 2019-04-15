@@ -14,11 +14,15 @@ class User:
         self.gender = gender
         self.rating = rating
 
+
     @classmethod
     def from_dict(cls, adict):
         user = User(code=adict['code'], name=adict['name'], surname=adict['surname'], email=adict['email'],
-                    password=adict['password'], reg_date=adict['reg_date'], mobile=adict['mobile'],
-                    age=adict['age'], gender=adict['gender'], rating=adict['rating'])
+                    password=adict['password'], reg_date=adict['reg_date'],
+                    mobile=adict['mobile'] if ('mobile' in adict) else None,
+                    age=adict['age'] if ('age' in adict) else None,
+                    gender=adict['gender'] if ('gender' in adict) else None,
+                    rating=adict['rating'] if ('rating' in adict) else None)
         return user
 
     def to_dict(self):
