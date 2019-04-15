@@ -12,15 +12,15 @@ TEST_DATE = datetime(2007, 12, 5, 22, 30)
 
 
 def test_serialize_domain_user():
-    code = uuid.uuid4()
+    userId = uuid.uuid4()
 
-    user = User(code, name="Ivan", surname="Ivanov", email="ivan@gmail.com",
+    user = User(userId, name="Ivan", surname="Ivanov", email="ivan@gmail.com",
                 password="123456", reg_date=TEST_DATE.timestamp(), mobile="12345678",
                 age=20, gender="male")
 
     expected_json = """
         {{
-            "code": "{}",
+            "userId": "{}",
             "name": "Ivan",
             "surname": "Ivanov",
             "email": "ivan@gmail.com",
@@ -31,7 +31,7 @@ def test_serialize_domain_user():
             "gender": "male",
             "rating": "{}"
         }}
-    """.format(code, None, [])
+    """.format(userId, None, [])
 
     json_user = json.dumps(user, cls=srs.UserEncoder)
 

@@ -6,12 +6,12 @@ TEST_DATE = datetime(2007, 12, 5, 22, 30)
 
 
 def test_user_model_init():
-    code = uuid.uuid4()
-    user = User(code, name="Ivan", surname="Ivanov", email="ivan@gmail.com",
+    userId = uuid.uuid4()
+    user = User(userId, name="Ivan", surname="Ivanov", email="ivan@gmail.com",
                 password="123456", reg_date=TEST_DATE, mobile="12345678",
                 age=20, gender="male")
 
-    assert user.code == code
+    assert user.userId == userId
     assert user.name == "Ivan"
     assert user.surname == "Ivanov"
     assert user.email == "ivan@gmail.com"
@@ -24,10 +24,10 @@ def test_user_model_init():
 
 
 def test_user_model_from_dict():
-    code = uuid.uuid4()
+    userId = uuid.uuid4()
     user = User.from_dict(
         {
-            'code': code,
+            'userId': userId,
             'name': 'Ivan',
             'surname': 'Ivanov',
             'email': 'ivan@gmail.com',
@@ -40,7 +40,7 @@ def test_user_model_from_dict():
         }
     )
 
-    assert user.code == code
+    assert user.userId == userId
     assert user.name == "Ivan"
     assert user.surname == "Ivanov"
     assert user.email == "ivan@gmail.com"
@@ -54,7 +54,7 @@ def test_user_model_from_dict():
 
 def test_user_model_to_dict():
     user_dict = {
-        'code': uuid.uuid4(),
+        'userId': uuid.uuid4(),
         'name': 'Ivan',
         'surname': 'Ivanov',
         'email': 'ivan@gmail.com',
@@ -73,7 +73,7 @@ def test_user_model_to_dict():
 
 def test_user_model_comparison():
     user_dict = {
-        'code': uuid.uuid4(),
+        'userId': uuid.uuid4(),
         'name': 'Ivan',
         'surname': 'Ivanov',
         'email': 'ivan@gmail.com',
@@ -92,10 +92,10 @@ def test_user_model_comparison():
 
 
 def test_user_model_from_partial_dict():
-    code = uuid.uuid4()
+    userId = uuid.uuid4()
     user = User.from_dict(
         {
-            'code': code,
+            'userId': userId,
             'name': 'Ivan',
             'surname': 'Ivanov',
             'email': 'ivan@gmail.com',
@@ -104,7 +104,7 @@ def test_user_model_from_partial_dict():
         }
     )
 
-    assert user.code == code
+    assert user.userId == userId
     assert user.name == "Ivan"
     assert user.surname == "Ivanov"
     assert user.email == "ivan@gmail.com"
