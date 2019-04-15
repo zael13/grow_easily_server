@@ -145,4 +145,5 @@ def test_module_should_set_all_internal_values_according_init_arguments():
     assert (m.name == "test module")
     assert (m.trigger == event)
     assert (m.hardware == hw)
-    assert (isinstance(m.data_type, int))
+    assert (isinstance(m.data_type, type(int)))
+
