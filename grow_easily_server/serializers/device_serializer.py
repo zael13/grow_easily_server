@@ -1,23 +1,18 @@
 import json
-from grow_easily_server.domain.user import User
+from grow_easily_server.domain.device import Device
 import decimal
 
 
-class UserEncoder(json.JSONEncoder):
+class DeviceEncoder(json.JSONEncoder):
     def default(self, o):
         try:
-            if isinstance(o, User):
+            if isinstance(o, Device):
                 to_serialize = {
+                    'deviceId': str(o.deviceId),
                     'userId': str(o.userId),
+                    'recipeId': str(o.recipeId),
                     'name': o.name,
-                    'surname': o.surname,
-                    'email': o.email,
-                    'password': o.password,
-                    'reg_date': o.reg_date,
-                    'mobile': o.mobile,
-                    'age': o.age,
-                    'gender': o.gender,
-                    'rating': str(o.rating)
+                    'startTime': o.startTime
                 }
             elif isinstance(o, decimal.Decimal):
                 if o % 1 == 0:
