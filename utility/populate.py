@@ -200,7 +200,8 @@ hardwareTable = dynamodb.Table('Hardware')
 hardwareTable.put_item(
 	Item={
         'hardwareId': str(hardware1),
-        'type': "DHT_TEMPERATURE",
+        'moduleId': str(module1),
+        'hwType': "DHT_TEMPERATURE",
         'name': "DHT",
         'pins': [1,2],
 		'value': Decimal(20.0),
@@ -212,7 +213,8 @@ hardwareTable.put_item(
 hardwareTable.put_item(
 	Item={
         'hardwareId': str(hardware2),
-        'type': "DIGITAL_WRITER",
+        'moduleId': str(module1),
+        'hwType': "DIGITAL_WRITER",
         'name': "Pin",
         'pins': [3],
 		'value': Decimal(60.0),
