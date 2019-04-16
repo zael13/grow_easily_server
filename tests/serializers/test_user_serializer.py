@@ -31,7 +31,7 @@ def test_serialize_domain_user():
             "gender": "male",
             "rating": "{}"
         }}
-    """.format(userId, None, [])
+    """.format(userId, None)
 
     json_user = json.dumps(user, cls=srs.UserEncoder)
 
