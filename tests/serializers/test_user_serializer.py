@@ -6,7 +6,7 @@ import pytest
 
 from grow_easily_server.serializers import user_serializer as srs
 from grow_easily_server.domain.user import User
-
+from decimal import Decimal
 
 TEST_DATE = datetime(2007, 12, 5, 22, 30)
 
@@ -15,8 +15,8 @@ def test_serialize_domain_user():
     userId = uuid.uuid4()
 
     user = User(userId, name="Ivan", surname="Ivanov", email="ivan@gmail.com",
-                password="123456", reg_date=TEST_DATE.timestamp(), mobile="12345678",
-                age=20, gender="male")
+                password="123456", reg_date=Decimal(TEST_DATE.timestamp()), mobile="12345678",
+                age=Decimal(20.5), gender="male")
 
     expected_json = """
         {{
@@ -27,7 +27,7 @@ def test_serialize_domain_user():
             "password": "123456",
             "reg_date": 1196890200.0,
             "mobile": "12345678",
-            "age": 20,
+            "age": 20.5,
             "gender": "male",
             "rating": "{}"
         }}
