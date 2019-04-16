@@ -31,7 +31,7 @@ userTable = dynamodb.Table('User')
 
 userTable.put_item(
 	Item={
-        'userId': str(maxId),
+        'user_id': str(maxId),
 		'name': "Max",
 		'surname': "Some surname",
 		'email': "max.zastavny@gmail.com",
@@ -46,7 +46,7 @@ userTable.put_item(
 
 userTable.put_item(
 	Item={
-		'userId': str(dianaId),
+		'user_id': str(dianaId),
 		'name': "Diana",
 		'surname': "Some surname",
 		'email': "diana.sukhinina1@gmail.com",
@@ -60,7 +60,7 @@ userTable.put_item(
 
 userTable.put_item(
 	Item={
-		'userId': str(antonId),
+		'user_id': str(antonId),
 		'name': "Anton",
 		'surname': "Some surname",
 		'email': "antonioua1340@gmail.com",
@@ -74,7 +74,7 @@ userTable.put_item(
 
 userTable.put_item(
 	Item={
-		'userId': str(uuid.uuid4()),
+		'user_id': str(uuid.uuid4()),
 		'name': "Ivan",
 		'surname': "Ivanov",
 		'email': "ivan@gmail.com",
@@ -91,41 +91,41 @@ deviceTable = dynamodb.Table('Device')
 
 deviceTable.put_item(
 	Item={
-        'deviceId': str(device1),
-		'userId': str(maxId),
-		'recipeId': str(recipe1),
+        'device_id': str(device1),
+		'user_id': str(maxId),
+		'recipe_id': str(recipe1),
 		'name': "dev1",
-		'startTime': 1555331650,
+		'start_time': 1555331650,
 	}
 )
 
 deviceTable.put_item(
 	Item={
-        'deviceId': str(device2),
-		'userId': str(maxId),
-		'recipeId': str(recipe1),
+        'device_id': str(device2),
+		'user_id': str(maxId),
+		'recipe_id': str(recipe1),
 		'name': "dev2",
-		'startTime': 1555331650,
+		'start_time': 1555331650,
 	}
 )
 
 deviceTable.put_item(
 	Item={
-        'deviceId': str(device3),
-		'userId': str(dianaId),
-		'recipeId': str(recipe2),
+        'device_id': str(device3),
+		'user_id': str(dianaId),
+		'recipe_id': str(recipe2),
 		'name': "dev3",
-		'startTime': 1555331650,
+		'start_time': 1555331650,
 	}
 )
 
 deviceTable.put_item(
 	Item={
-        'deviceId': str(device4),
-		'userId': str(antonId),
-		'recipeId': str(recipe2),
+        'device_id': str(device4),
+		'user_id': str(antonId),
+		'recipe_id': str(recipe2),
 		'name': "dev4",
-		'startTime': 1555331650,
+		'start_time': 1555331650,
 	}
 )
 
@@ -134,8 +134,8 @@ recipeTable = dynamodb.Table('Recipe')
 
 recipeTable.put_item(
 	Item={
-        'recipeId': str(recipe1),
-		'userId': str(maxId),
+        'recipe_id': str(recipe1),
+		'user_id': str(maxId),
 		'name': "Tomato",
 		'rank': Decimal(5.0),
 		'culture': "tomatoes",
@@ -146,8 +146,8 @@ recipeTable.put_item(
 
 recipeTable.put_item(
 	Item={
-        'recipeId': str(uuid.uuid4()),
-		'userId': str(maxId),
+        'recipe_id': str(uuid.uuid4()),
+		'user_id': str(maxId),
 		'name': "Potaito",
 		'rank': Decimal(5.0),
 		'culture': "potaito",
@@ -158,8 +158,8 @@ recipeTable.put_item(
 
 recipeTable.put_item(
 	Item={
-        'recipeId': str(recipe1),
-		'userId': str(dianaId),
+        'recipe_id': str(recipe1),
+		'user_id': str(dianaId),
 		'name': "Salad",
 		'rank': Decimal(5.0),
 		'culture': "salad",
@@ -172,9 +172,9 @@ moduleTable = dynamodb.Table('Module')
 
 moduleTable.put_item(
 	Item={
-        'moduleId': str(module1),
+        'module_id': str(module1),
         'name': "Temperature",
-		'triggerId': str(trigger1),
+		'trigger_id': str(trigger1),
 		'name': "Tomato",
 		'hardwareId1': str(hardware1),
 		'value': Decimal(20.0),
@@ -184,14 +184,14 @@ moduleTable.put_item(
 
 moduleTable.put_item(
 	Item={
-        'moduleId': str(module2),
+        'module_id': str(module2),
         'name': "Moisure",
-		'triggerId': str(trigger2),
+		'trigger_id': str(trigger2),
 		'hardwareId1': str(hardware1),
 		'hardwareId2': str(hardware2),
         'value': Decimal(60.0),
         'delta': Decimal(5.0),
-		'userId': str(maxId),
+		'user_id': str(maxId),
 	}
 )
 
@@ -199,27 +199,27 @@ hardwareTable = dynamodb.Table('Hardware')
 
 hardwareTable.put_item(
 	Item={
-        'hardwareId': str(hardware1),
-        'moduleId': str(module1),
-        'hwType': "DHT_TEMPERATURE",
+        'hardware_id': str(hardware1),
+        'module_id': str(module1),
+        'hw_type': "DHT_TEMPERATURE",
         'name': "DHT",
         'pins': [1,2],
 		'value': Decimal(20.0),
         'delta': Decimal(2.0),
-        'userId': str(maxId),
+        'user_id': str(maxId),
     }
 )
 
 hardwareTable.put_item(
 	Item={
-        'hardwareId': str(hardware2),
-        'moduleId': str(module1),
-        'hwType': "DIGITAL_WRITER",
+        'hardware_id': str(hardware2),
+        'module_id': str(module1),
+        'hw_type': "DIGITAL_WRITER",
         'name': "Pin",
         'pins': [3],
 		'value': Decimal(60.0),
         'delta': Decimal(2.0),
-        'userId': str(maxId),
+        'user_id': str(maxId),
 	}
 )
 
@@ -227,22 +227,22 @@ triggerTable = dynamodb.Table('Trigger')
 
 triggerTable.put_item(
 	Item={
-        'triggerId': str(trigger1),
-        'moduleId': str(module1),
+        'trigger_id': str(trigger1),
+        'module_id': str(module1),
         'name': "PeriodicEvent",
-		'startTime': 1555331650,
-		'endTime': 1555331650,
+		'start_time': 1555331650,
+		'end_time': 1555331650,
         'delta': Decimal(2.0),
 	}
 )
 
 triggerTable.put_item(
 	Item={
-        'triggerId': str(trigger2),
-        'moduleId': str(module1),
+        'trigger_id': str(trigger2),
+        'module_id': str(module1),
         'name': "DailyEvent",
-		'startTime': 1555331650,
-		'endTime': 1555331650,
+		'start_time': 1555331650,
+		'end_time': 1555331650,
         'delta': Decimal(2.0),
 	}
 )

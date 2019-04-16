@@ -3,11 +3,11 @@ from grow_easily_server.shared.domain_model import DomainModel
 
 class Hardware:
     def __init__(self, hardware_id, module_id, user_id, name, hw_type, pins=None, value=None, delta=None):
-        self.hardwareId = hardware_id
-        self.moduleId = module_id
-        self.userId = user_id
+        self.hardware_id = hardware_id
+        self.module_id = module_id
+        self.user_id = user_id
         self.name = name
-        self.hwType = hw_type
+        self.hw_type = hw_type
         self.pins = pins
         self.value = value
         self.delta = delta
@@ -15,8 +15,8 @@ class Hardware:
 
     @classmethod
     def from_dict(cls, adict):
-        hardware = Hardware(hardware_id=adict['hardwareId'], module_id=adict['moduleId'],
-                            user_id=adict['userId'], name=adict['name'], hw_type=adict['hwType'],
+        hardware = Hardware(hardware_id=adict['hardware_id'], module_id=adict['module_id'],
+                            user_id=adict['user_id'], name=adict['name'], hw_type=adict['hw_type'],
                             pins=adict['pins'] if ('pins' in adict) else [],
                             value=adict['value'] if ('value' in adict) else None,
                             delta=adict['delta'] if ('delta' in adict) else None)
@@ -24,11 +24,11 @@ class Hardware:
 
     def to_dict(self):
         return {
-            'hardwareId': self.hardwareId,
-            'moduleId': self.moduleId,
-            'userId': self.userId,
+            'hardware_id': self.hardware_id,
+            'module_id': self.module_id,
+            'user_id': self.user_id,
             'name': self.name,
-            'hwType': self.hwType,
+            'hw_type': self.hw_type,
             'pins': self.pins,
             'value': self.value,
             'delta': self.delta

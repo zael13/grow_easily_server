@@ -3,26 +3,26 @@ from grow_easily_server.shared.domain_model import DomainModel
 
 class Device:
     def __init__(self, device_id, user_id, recipe_id, name, start_time):
-        self.deviceId = device_id
-        self.userId = user_id
-        self.recipeId = recipe_id
+        self.device_id = device_id
+        self.user_id = user_id
+        self.recipe_id = recipe_id
         self.name = name
-        self.startTime = start_time
+        self.start_time = start_time
 
     @classmethod
     def from_dict(cls, adict):
-        device = Device(device_id=adict['deviceId'], user_id=adict['userId'],
-                        recipe_id=adict['recipeId'], name=adict['name'],
-                        start_time=adict['startTime'])
+        device = Device(device_id=adict['device_id'], user_id=adict['user_id'],
+                        recipe_id=adict['recipe_id'], name=adict['name'],
+                        start_time=adict['start_time'])
         return device
 
     def to_dict(self):
         return {
-            'deviceId': self.deviceId,
-            'userId': self.userId,
-            'recipeId': self.recipeId,
+            'device_id': self.device_id,
+            'user_id': self.user_id,
+            'recipe_id': self.recipe_id,
             'name': self.name,
-            'startTime': self.startTime
+            'start_time': self.start_time
         }
 
     def __eq__(self, other):

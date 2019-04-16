@@ -8,11 +8,11 @@ class DeviceEncoder(json.JSONEncoder):
         try:
             if isinstance(o, Device):
                 to_serialize = {
-                    'deviceId': str(o.deviceId),
-                    'userId': str(o.userId),
-                    'recipeId': str(o.recipeId),
+                    'device_id': str(o.device_id),
+                    'user_id': str(o.user_id),
+                    'recipe_id': str(o.recipe_id),
                     'name': o.name,
-                    'startTime': o.startTime
+                    'start_time': o.start_time
                 }
             elif isinstance(o, decimal.Decimal):
                 if o % 1 == 0:

@@ -8,14 +8,14 @@ from grow_easily_server.serializers import measurement_serializer as srs
 from grow_easily_server.domain.measurement import Measurement
 from decimal import Decimal
 
-measurementId = str(uuid.uuid4())
-deviceId = str(uuid.uuid4())
+measurement_id = str(uuid.uuid4())
+device_id = str(uuid.uuid4())
 image_id = str(uuid.uuid4())
 TIMESTAMP = datetime(2007, 12, 5, 22, 30).timestamp()
 
 
 def test_serialize_domain_measurement():
-    measurement = Measurement(measurementId, deviceId, TIMESTAMP,
+    measurement = Measurement(measurement_id, device_id, TIMESTAMP,
                               temperature=22.3,
                               moisture=68.2,
                               ph_level=6.5,
@@ -31,23 +31,23 @@ def test_serialize_domain_measurement():
 
     expected_json = """
         {{
-        "measurementId": "{}",
-        "deviceId": "{}",
+        "measurement_id": "{}",
+        "device_id": "{}",
         "timestamp": {},
         "temperature": 22.3,
         "moisture": 68.2,
-        "phLevel": 6.5,
+        "ph_level": 6.5,
         "height": 32.8,
-        "waterLevel": 0.2,
-        "imageId": "{}",
-        "exhaustHood": 1,
+        "water_level": 0.2,
+        "image_id": "{}",
+        "exhaust_hood": 1,
         "light": 1,
         "fertilizer": 0,
         "custom1": 22.1,
         "custom2": "test_val",
         "custom3": null
         }}
-    """.format(measurementId, deviceId, TIMESTAMP, image_id)
+    """.format(measurement_id, device_id, TIMESTAMP, image_id)
 
     json_measurement = json.dumps(measurement, cls=srs.MeasurementEncoder)
 
@@ -62,7 +62,7 @@ def test_serialize_domain_measurement_wrong_type():
 
 
 def test_serialize_domain_measurement_with_wrong_type():
-    measurement = Measurement(measurementId, deviceId, TIMESTAMP,
+    measurement = Measurement(measurement_id, device_id, TIMESTAMP,
                               temperature=22.3,
                               moisture=68.2,
                               ph_level=6.5,

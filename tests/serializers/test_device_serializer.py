@@ -20,11 +20,11 @@ def test_serialize_domain_device():
 
     expected_json = """
         {{
-            "deviceId": "{}",
-            "userId": "{}",
-            "recipeId": "{}",
+            "device_id": "{}",
+            "user_id": "{}",
+            "recipe_id": "{}",
             "name": "dev1",
-            "startTime": {}
+            "start_time": {}
         }}
     """.format(device_id, user_id, recipe_id, Decimal(START_TIME))
 
@@ -44,11 +44,11 @@ def test_serialize_domain_device_with_float():
 
     expected_json = """
         {{
-            "deviceId": "{}",
-            "userId": "{}",
-            "recipeId": "{}",
+            "device_id": "{}",
+            "user_id": "{}",
+            "recipe_id": "{}",
             "name": "dev1",
-            "startTime": {}
+            "start_time": {}
         }}
     """.format(device_id, user_id, recipe_id, Decimal(1.1))
 

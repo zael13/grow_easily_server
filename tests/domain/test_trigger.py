@@ -11,11 +11,11 @@ def test_trigger_model_init():
     trigger = Trigger(trigger_id, module_id, name="daily", start_time=START_TIME,
                       end_time=START_TIME+10, delta=5)
 
-    assert trigger.triggerId == trigger_id
-    assert trigger.moduleId == module_id
+    assert trigger.trigger_id == trigger_id
+    assert trigger.module_id == module_id
     assert trigger.name == "daily"
-    assert trigger.startTime == START_TIME
-    assert trigger.endTime == START_TIME+10
+    assert trigger.start_time == START_TIME
+    assert trigger.end_time == START_TIME+10
     assert trigger.delta == 5
 
 
@@ -24,20 +24,20 @@ def test_trigger_model_from_dict():
     module_id = str(uuid.uuid4())
     trigger = Trigger.from_dict(
         {
-            'triggerId': trigger_id,
-            'moduleId': module_id,
+            'trigger_id': trigger_id,
+            'module_id': module_id,
             'name': "daily",
-            'startTime': START_TIME,
-            'endTime': START_TIME+10,
+            'start_time': START_TIME,
+            'end_time': START_TIME+10,
             'delta': 5,
         }
     )
 
-    assert trigger.triggerId == trigger_id
-    assert trigger.moduleId == module_id
+    assert trigger.trigger_id == trigger_id
+    assert trigger.module_id == module_id
     assert trigger.name == "daily"
-    assert trigger.startTime == START_TIME
-    assert trigger.endTime == START_TIME+10
+    assert trigger.start_time == START_TIME
+    assert trigger.end_time == START_TIME+10
     assert trigger.delta == 5
 
 
@@ -45,11 +45,11 @@ def test_trigger_model_to_dict():
     trigger_id = str(uuid.uuid4())
     module_id = str(uuid.uuid4())
     trigger_dict = {
-        'triggerId': trigger_id,
-        'moduleId': module_id,
+        'trigger_id': trigger_id,
+        'module_id': module_id,
         'name': "daily",
-        'startTime': START_TIME,
-        'endTime': START_TIME + 10,
+        'start_time': START_TIME,
+        'end_time': START_TIME + 10,
         'delta': 5,
     }
 
@@ -62,11 +62,11 @@ def test_trigger_model_comparison():
     trigger_id = str(uuid.uuid4())
     module_id = str(uuid.uuid4())
     trigger_dict = {
-        'triggerId': trigger_id,
-        'moduleId': module_id,
+        'trigger_id': trigger_id,
+        'module_id': module_id,
         'name': "daily",
-        'startTime': START_TIME,
-        'endTime': START_TIME + 10,
+        'start_time': START_TIME,
+        'end_time': START_TIME + 10,
         'delta': 5,
     }
 

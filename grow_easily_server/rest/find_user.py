@@ -55,3 +55,52 @@ def add_user():
     return Response(json.dumps(response.value, cls=ser.UserEncoder),
                     mimetype='application/json',
                     status=STATUS_CODES[response.type])
+
+
+from grow_easily_server.serializers import device_serializer as ser2
+from grow_easily_server.domain import device
+
+
+@blueprint.route('/find_device', methods=['GET'])
+def find_device():
+    request_object = parse_request_object()
+
+    repo = dbr.Dynamodb(device.Device)
+    use_case = uc.UserListUseCase(repo)
+
+    response = use_case.execute(request_object)
+
+    return Response(json.dumps(response.value, cls=ser2.DeviceEncoder),
+                    mimetype='application/json',
+                    status=STATUS_CODES[response.type])
+
+
+@blueprint.route('/add_device', methods=['GET'])
+def add_device():
+    request_object = parse_request_object()
+    repo = dbr.Dynamodb(device.Device)
+    use_case = uc.UserAddUseCase(repo)
+    response = use_case.execute(request_object)
+
+    return Response(json.dumps(response.value, cls=ser2.DeviceEncoder),
+                    mimetype='application/json',
+                    status=STATUS_CODES[response.type])
+
+
+from grow_easily_server.serializers import trigger_serializer as ser3
+from grow_easily_server.domain import trigger
+
+
+@blueprint.route('/find_trigger', methods=['GET'])
+def find_trigger():
+    request_object = parse_request_object()
+
+    repo = dbr.Dynamodb(trigger.Trigger)
+    use_case = uc.UserListUseCase(repo)
+
+    response = use_case.execute(request_object)
+
+    return Response(json.dumps(response.value, cls=ser3.TriggerEncoder),
+                    mimetype='application/json',
+                    status=STATUS_CODES[response.type])
+

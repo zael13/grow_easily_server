@@ -8,11 +8,11 @@ class TriggerEncoder(json.JSONEncoder):
         try:
             if isinstance(o, Trigger):
                 to_serialize = {
-                    'triggerId': str(o.triggerId),
-                    'moduleId': str(o.moduleId),
+                    'trigger_id': str(o.trigger_id),
+                    'module_id': str(o.module_id),
                     'name': o.name,
-                    'startTime': o.startTime,
-                    'endTime': o.endTime,
+                    'start_time': o.start_time,
+                    'end_time': o.end_time,
                     'delta': o.delta
                 }
             elif isinstance(o, decimal.Decimal):

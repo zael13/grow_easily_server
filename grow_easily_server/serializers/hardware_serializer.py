@@ -8,11 +8,11 @@ class HardwareEncoder(json.JSONEncoder):
         try:
             if isinstance(o, Hardware):
                 to_serialize = {
-                    'hardwareId': str(o.hardwareId),
-                    'moduleId': str(o.moduleId),
-                    'userId': str(o.userId),
+                    'hardware_id': str(o.hardware_id),
+                    'module_id': str(o.module_id),
+                    'user_id': str(o.user_id),
                     'name': o.name,
-                    'hwType': o.hwType,
+                    'hw_type': o.hw_type,
                     'pins': o.pins,
                     'value': o.value,
                     'delta': o.delta

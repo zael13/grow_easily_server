@@ -11,11 +11,11 @@ def test_device_model_init():
     recipe_id = str(uuid.uuid4())
     device = Device(device_id, user_id, recipe_id, name="dev1", start_time=START_TIME)
 
-    assert device.deviceId == device_id
-    assert device.userId == user_id
-    assert device.recipeId == recipe_id
+    assert device.device_id == device_id
+    assert device.user_id == user_id
+    assert device.recipe_id == recipe_id
     assert device.name == "dev1"
-    assert device.startTime == START_TIME
+    assert device.start_time == START_TIME
 
 
 def test_device_model_from_dict():
@@ -24,19 +24,19 @@ def test_device_model_from_dict():
     recipe_id = str(uuid.uuid4())
     device = Device.from_dict(
         {
-            'deviceId': device_id,
-            'userId': user_id,
-            'recipeId': recipe_id,
+            'device_id': device_id,
+            'user_id': user_id,
+            'recipe_id': recipe_id,
             'name': 'dev1',
-            'startTime': START_TIME,
+            'start_time': START_TIME,
         }
     )
 
-    assert device.deviceId == device_id
-    assert device.userId == user_id
-    assert device.recipeId == recipe_id
+    assert device.device_id == device_id
+    assert device.user_id == user_id
+    assert device.recipe_id == recipe_id
     assert device.name == "dev1"
-    assert device.startTime == START_TIME
+    assert device.start_time == START_TIME
 
 
 def test_device_model_to_dict():
@@ -44,11 +44,11 @@ def test_device_model_to_dict():
     user_id = str(uuid.uuid4())
     recipe_id = str(uuid.uuid4())
     device_dict = {
-        'deviceId': device_id,
-        'userId': user_id,
-        'recipeId': recipe_id,
+        'device_id': device_id,
+        'user_id': user_id,
+        'recipe_id': recipe_id,
         'name': 'dev1',
-        'startTime': START_TIME,
+        'start_time': START_TIME,
     }
 
     device = Device.from_dict(device_dict)
@@ -61,11 +61,11 @@ def test_device_model_comparison():
     user_id = str(uuid.uuid4())
     recipe_id = str(uuid.uuid4())
     device_dict = {
-        'deviceId': device_id,
-        'userId': user_id,
-        'recipeId': recipe_id,
+        'device_id': device_id,
+        'user_id': user_id,
+        'recipe_id': recipe_id,
         'name': 'dev1',
-        'startTime': START_TIME,
+        'start_time': START_TIME,
     }
 
     device1 = Device.from_dict(device_dict)

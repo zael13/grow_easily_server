@@ -10,7 +10,7 @@ from grow_easily_server.serializers import user_serializer as srs
 import uuid
 
 user1_dict = {
-    'userId': str(uuid.uuid4()),
+    'user_id': str(uuid.uuid4()),
     'name': 'Ivan',
     'surname': 'Ivanov',
     'email': 'ivan@gmail.com',

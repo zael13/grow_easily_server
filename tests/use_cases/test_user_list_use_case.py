@@ -16,7 +16,7 @@ TEST_DATE = datetime.datetime(2007, 12, 5, 22, 30)
 @pytest.fixture
 def domain_users():
     user_1 = User(
-        userId=uuid.uuid4(),
+        user_id=uuid.uuid4(),
         name='Vova',
         surname='Ivanov',
         email='vova@gmail.com',
@@ -29,7 +29,7 @@ def domain_users():
     )
 
     user_2 = User(
-        userId=uuid.uuid4(),
+        user_id=uuid.uuid4(),
         name='Ivan',
         surname='Ivanov',
         email='ivanov@gmail.com',
@@ -42,7 +42,7 @@ def domain_users():
     )
 
     user_3 = User(
-        userId=uuid.uuid4(),
+        user_id=uuid.uuid4(),
         name='Maksym',
         surname='Ivanov',
         email='maks@gmail.com',
@@ -55,7 +55,7 @@ def domain_users():
     )
 
     user_4 = User(
-        userId=uuid.uuid4(),
+        user_id=uuid.uuid4(),
         name='Den',
         surname='Ivanov',
         email='den@gmail.com',
@@ -173,7 +173,7 @@ def test_user_add_with_filters(domain_users):
                    'surname': "test",
                    'password': "pass",
                    'reg_date': 12345,
-                   'userId': "12345"}
+                   'user_id': "12345"}
     request_object = req.RecipeListRequestObject.from_dict({'filters': qry_filters})
 
     response_object = user_add_use_case.execute(request_object)

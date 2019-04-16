@@ -21,11 +21,11 @@ def test_serialize_domain_trigger():
 
     expected_json = """
         {{
-            "hardwareId": "{}",
-            "moduleId": "{}",
-            "userId": "{}",
+            "hardware_id": "{}",
+            "module_id": "{}",
+            "user_id": "{}",
             "name": "Temperature1",
-            "hwType": "DHT_TEMPERATURE",
+            "hw_type": "DHT_TEMPERATURE",
             "pins": [1, 2],
             "value": 20.5,
             "delta": 2.0

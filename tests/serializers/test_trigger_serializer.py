@@ -19,11 +19,11 @@ def test_serialize_domain_trigger():
 
     expected_json = """
         {{
-            "triggerId": "{}",
-            "moduleId": "{}",
+            "trigger_id": "{}",
+            "module_id": "{}",
             "name": "daily",
-            "startTime": {},
-            "endTime": {},
+            "start_time": {},
+            "end_time": {},
             "delta": 5
         }}
     """.format(trigger_id, module_id, Decimal(START_TIME), Decimal(START_TIME+0.1))

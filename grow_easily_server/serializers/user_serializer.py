@@ -8,7 +8,7 @@ class UserEncoder(json.JSONEncoder):
         try:
             if isinstance(o, User):
                 to_serialize = {
-                    'userId': str(o.userId),
+                    'user_id': str(o.user_id),
                     'name': o.name,
                     'surname': o.surname,
                     'email': o.email,

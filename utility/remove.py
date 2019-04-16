@@ -37,7 +37,7 @@ params = {
 dynamodb.delete_table(**params)
 
 params = {
-    'TableName' : 'User'
+    'TableName': 'User'
 }
 dynamodb.delete_table(**params)
 

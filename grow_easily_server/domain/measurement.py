@@ -20,17 +20,17 @@ class Measurement:
                  custom2=None,
                  custom3=None
     ):
-        self.measurementId = measurement_id
-        self.deviceId = device_id
+        self.measurement_id = measurement_id
+        self.device_id = device_id
         self.timestamp = timestamp
         self.temperature = temperature
         self.moisture = moisture
-        self.phLevel = ph_level
+        self.ph_level = ph_level
         self.height = height
-        self.waterLevel = water_level
-        self.imageId = image_id
+        self.water_level = water_level
+        self.image_id = image_id
         self.heater = heater
-        self.exhaustHood = exhaust_hood
+        self.exhaust_hood = exhaust_hood
         self.light = light
         self.fertilizer = fertilizer
         self.custom1 = custom1
@@ -39,16 +39,16 @@ class Measurement:
 
     @classmethod
     def from_dict(cls, adict):
-        measurement = Measurement(measurement_id=adict['measurementId'],
-                                  device_id=adict['deviceId'],
+        measurement = Measurement(measurement_id=adict['measurement_id'],
+                                  device_id=adict['device_id'],
                                   timestamp=adict['timestamp'],
                                   temperature=adict['temperature'] if ('temperature' in adict) else None,
                                   moisture=adict['moisture'] if ('moisture' in adict) else None,
-                                  ph_level=adict['phLevel'] if ('phLevel' in adict) else None,
+                                  ph_level=adict['ph_level'] if ('ph_level' in adict) else None,
                                   height=adict['height'] if ('height' in adict) else None,
-                                  water_level=adict['waterLevel'] if ('waterLevel' in adict) else None,
-                                  image_id=adict['imageId'] if ('imageId' in adict) else None,
-                                  exhaust_hood=adict['exhaustHood'] if ('exhaustHood' in adict) else None,
+                                  water_level=adict['water_level'] if ('water_level' in adict) else None,
+                                  image_id=adict['image_id'] if ('image_id' in adict) else None,
+                                  exhaust_hood=adict['exhaust_hood'] if ('exhaust_hood' in adict) else None,
                                   light=adict['light'] if ('light' in adict) else None,
                                   fertilizer=adict['fertilizer'] if ('fertilizer' in adict) else None,
                                   custom1=adict['custom1'] if ('custom1' in adict) else None,
@@ -59,16 +59,16 @@ class Measurement:
 
     def to_dict(self):
         return {
-            'measurementId': self.measurementId,
-            'deviceId': self.deviceId,
+            'measurement_id': self.measurement_id,
+            'device_id': self.device_id,
             'timestamp': self.timestamp,
             'temperature': self.temperature,
             'moisture': self.moisture,
-            'phLevel': self.phLevel,
+            'ph_level': self.ph_level,
             'height': self.height,
-            'waterLevel': self.waterLevel,
-            'imageId': self.imageId,
-            'exhaustHood': self.exhaustHood,
+            'water_level': self.water_level,
+            'image_id': self.image_id,
+            'exhaust_hood': self.exhaust_hood,
             'light': self.light,
             'fertilizer': self.fertilizer,
             'custom1': self.custom1,

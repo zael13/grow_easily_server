@@ -8,16 +8,16 @@ class MeasurementEncoder(json.JSONEncoder):
         try:
             if isinstance(o, Measurement):
                 to_serialize = {
-                    'measurementId': str(o.measurementId),
-                    'deviceId': str(o.deviceId),
+                    'measurement_id': str(o.measurement_id),
+                    'device_id': str(o.device_id),
                     'timestamp': o.timestamp,
                     'temperature': o.temperature,
                     'moisture': o.moisture,
-                    'phLevel': o.phLevel,
+                    'ph_level': o.ph_level,
                     'height': o.height,
-                    'waterLevel': o.waterLevel,
-                    'imageId': str(o.imageId),
-                    'exhaustHood': o.exhaustHood,
+                    'water_level': o.water_level,
+                    'image_id': str(o.image_id),
+                    'exhaust_hood': o.exhaust_hood,
                     'light': o.light,
                     'fertilizer': o.fertilizer,
                     'custom1': o.custom1,

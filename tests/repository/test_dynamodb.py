@@ -11,7 +11,7 @@ from botocore.exceptions import ClientError
 def recipe_dicts():
     return [
         {
-            'userId': "qqqqqqq",
+            'user_id': "qqqqqqq",
             'name': "Ivan",
             'surname': "ivan@gmail.com",
             'email': "ivan@gmail.com",
@@ -23,7 +23,7 @@ def recipe_dicts():
             'rating': 1,
         },
         {
-            'userId': "qqqqqqq",
+            'user_id': "qqqqqqq",
             'name': "Vova",
             'surname': "ivan@gmail.com",
             'email': "ivan@gmail.com",
@@ -35,7 +35,7 @@ def recipe_dicts():
             'rating': 1,
         },
         {
-            'userId': "qqqqqqq",
+            'user_id': "qqqqqqq",
             'name': "Ivan",
             'surname': "ivan@gmail.com",
             'email': "ivan2@gmail.com",
@@ -47,7 +47,7 @@ def recipe_dicts():
             'rating': 1,
         },
         {
-            'userId': "qqqqqqq",
+            'user_id': "qqqqqqq",
             'name': "Ivan",
             'surname': "ivan@gmail.com",
             'email': "ivan3@gmail.com",
@@ -64,8 +64,8 @@ def recipe_dicts():
 def _check_results(domain_models_list, data_list):
     assert len(domain_models_list) == len(data_list)
     assert all([isinstance(dm, DomainModel) for dm in domain_models_list])
-    assert set([dm.userId for dm in domain_models_list]
-               ) == set([d['userId'] for d in data_list])
+    assert set([dm.user_id for dm in domain_models_list]
+               ) == set([d['user_id'] for d in data_list])
 
 
 def test_repository_list_without_parameters(recipe_dicts):

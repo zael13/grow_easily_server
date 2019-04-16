@@ -38,7 +38,7 @@ table = dynamodb.create_table(
     TableName='Device',
     KeySchema=[
         {
-            'AttributeName': 'userId',
+            'AttributeName': 'user_id',
             'KeyType': 'HASH'  #Partition key
         },
         {
@@ -48,7 +48,7 @@ table = dynamodb.create_table(
     ],
     AttributeDefinitions=[
         {
-            'AttributeName': 'userId',
+            'AttributeName': 'user_id',
             'AttributeType': 'S'
         },
         {
@@ -66,7 +66,7 @@ table = dynamodb.create_table(
     TableName='Measurement',
     KeySchema=[
         {
-            'AttributeName': 'deviceId',
+            'AttributeName': 'device_id',
             'KeyType': 'HASH'  #Partition key
         },
         {
@@ -76,7 +76,7 @@ table = dynamodb.create_table(
     ],
     AttributeDefinitions=[
         {
-            'AttributeName': 'deviceId',
+            'AttributeName': 'device_id',
             'AttributeType': 'S'
         },
         {
@@ -95,7 +95,7 @@ table = dynamodb.create_table(
     TableName='Recipe',
     KeySchema=[
         {
-            'AttributeName': 'userId',
+            'AttributeName': 'user_id',
             'KeyType': 'HASH'  #Partition key
         },
         {
@@ -105,7 +105,7 @@ table = dynamodb.create_table(
     ],
     AttributeDefinitions=[
         {
-            'AttributeName': 'userId',
+            'AttributeName': 'user_id',
             'AttributeType': 'S'
         },
         {
@@ -124,21 +124,21 @@ table = dynamodb.create_table(
     TableName='Module',
     KeySchema=[
         {
-            'AttributeName': 'triggerId',
+            'AttributeName': 'trigger_id',
             'KeyType': 'HASH'  #Partition key
         },
         {
-            'AttributeName': 'hardwareId1',
+            'AttributeName': 'hardware_id1',
             'KeyType': 'RANGE'  #Sort key
         }
     ],
     AttributeDefinitions=[
         {
-            'AttributeName': 'triggerId',
+            'AttributeName': 'trigger_id',
             'AttributeType': 'S'
         },
         {
-            'AttributeName': 'hardwareId1',
+            'AttributeName': 'hardware_id1',
             'AttributeType': 'S'
         }
     ],
@@ -153,21 +153,21 @@ table = dynamodb.create_table(
     TableName='Trigger',
     KeySchema=[
         {
-            'AttributeName': 'moduleId',
+            'AttributeName': 'module_id',
             'KeyType': 'HASH'  #Partition key
         },
         {
-            'AttributeName': 'triggerId',
+            'AttributeName': 'trigger_id',
             'KeyType': 'RANGE'  #Sort key
         }
     ],
     AttributeDefinitions=[
         {
-            'AttributeName': 'moduleId',
+            'AttributeName': 'module_id',
             'AttributeType': 'S'
         },
         {
-            'AttributeName': 'triggerId',
+            'AttributeName': 'trigger_id',
             'AttributeType': 'S'
         }
     ],
@@ -183,21 +183,21 @@ table = dynamodb.create_table(
     TableName='Hardware',
     KeySchema=[
         {
-            'AttributeName': 'moduleId',
+            'AttributeName': 'module_id',
             'KeyType': 'HASH'  #Partition key
         },
         {
-            'AttributeName': 'hwType',
+            'AttributeName': 'hw_type',
             'KeyType': 'RANGE'  #Sort key
         }
     ],
     AttributeDefinitions=[
         {
-            'AttributeName': 'moduleId',
+            'AttributeName': 'module_id',
             'AttributeType': 'S'
         },
         {
-            'AttributeName': 'hwType',
+            'AttributeName': 'hw_type',
             'AttributeType': 'S'
         }
     ],
