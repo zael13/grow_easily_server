@@ -8,16 +8,16 @@ class RecipeEncoder(json.JSONEncoder):
         try:
             if isinstance(o, Recipe):
                 to_serialize = {
-                    'code': str(o.code),
-                    'duration': o.duration,
-                    'owner': o.owner,
+                    'recipe_id': str(o.recipe_id),
+                    'culture': o.culture,
+                    'user_id': o.user_id,
                     'rating': o.rating,
                     'name': o.name,
-                    'items': o.items
+                    'modules': o.modules
                 }
             elif isinstance(o, Module):
                 to_serialize = {
-                    'code': str(o.code),
+                    'recipe_id': str(o.code),
                     'name': o.name,
                     'trigger': o.trigger,
                     'hardware': o.hardware,
@@ -25,7 +25,7 @@ class RecipeEncoder(json.JSONEncoder):
                 }
             elif isinstance(o, Hardware):
                 to_serialize = {
-                    'code': str(o.code),
+                    'recipe_id': str(o.code),
                     'name': o.name,
                     'hw_type': o.hw_type,
                     'pins': o.pins
@@ -35,7 +35,7 @@ class RecipeEncoder(json.JSONEncoder):
                     'type': o.__class__.__name__,
                     'impact': o.hw_type,
                     'period': str(int(o.period.total_seconds())),
-                    'duration': str(int(o.duration.total_seconds()))
+                    'culture': str(int(o.duration.total_seconds()))
                 }
             elif isinstance(o, HWType):
                 to_serialize = str(o.name)  # {'hw_type': str(o.name)}

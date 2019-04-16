@@ -13,17 +13,17 @@ from datetime import timedelta
 def test_serialize_domain_recipe():
     code = uuid.uuid4()
 
-    recipe = Recipe(code=code, owner=10, name=-0.09998975,
-                    duration=200, rating=51.75436293, items=None)
+    recipe = Recipe(recipe_id=code, user_id=10, name=-0.09998975,
+                    culture=200, rating=51.75436293, modules=None)
 
     expected_json = """
         {{
-            "code": "{}",
-            "duration": 200,
-            "owner": 10,
+            "recipe_id": "{}",
+            "culture": 200,
+            "user_id": 10,
             "name": -0.09998975,
             "rating": 51.75436293,
-            "items": {}
+            "modules": {}
         }}
     """.format(code, [])
 

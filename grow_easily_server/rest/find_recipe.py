@@ -17,25 +17,25 @@ STATUS_CODES = {
 }
 
 recipe1 = {
-    'code': 'f853578c-fc0f-4e65-81b8-566c5dffa35a',
-    'duration': 215,
-    'owner': 39,
+    'recipe_id': 'f853578c-fc0f-4e65-81b8-566c5dffa35a',
+    'culture': 215,
+    'user_id': 39,
     'name': -0.09998975,
     'rating': 51.75436293,
 }
 
 recipe2 = {
-    'code': 'fe2c3195-aeff-487a-a08f-e0bdc0ec6e9a',
-    'duration': 405,
-    'owner': 66,
+    'recipe_id': 'fe2c3195-aeff-487a-a08f-e0bdc0ec6e9a',
+    'culture': 405,
+    'user_id': 66,
     'name': 0.18228006,
     'rating': 51.74640997,
 }
 
 recipe3 = {
-    'code': '913694c6-435a-4366-ba0d-da5334a611b2',
-    'duration': 56,
-    'owner': 60,
+    'recipe_id': '913694c6-435a-4366-ba0d-da5334a611b2',
+    'culture': 56,
+    'user_id': 60,
     'name': 0.27891577,
     'rating': 51.45994069,
 }

@@ -12,33 +12,33 @@ from grow_easily_server.use_cases import recipe_use_cases as uc
 @pytest.fixture
 def domain_recipes():
     recipe_1 = Recipe(
-        code=uuid.uuid4(),
-        duration=215,
-        owner=39,
+        recipe_id=uuid.uuid4(),
+        culture=215,
+        user_id=39,
         name=-0.09998975,
         rating=51.75436293,
     )
 
     recipe_2 = Recipe(
-        code=uuid.uuid4(),
-        duration=405,
-        owner=66,
+        recipe_id=uuid.uuid4(),
+        culture=405,
+        user_id=66,
         name=0.18228006,
         rating=51.74640997,
     )
 
     recipe_3 = Recipe(
-        code=uuid.uuid4(),
-        duration=56,
-        owner=60,
+        recipe_id=uuid.uuid4(),
+        culture=56,
+        user_id=60,
         name=0.27891577,
         rating=51.45994069,
     )
 
     recipe_4 = Recipe(
-        code=uuid.uuid4(),
-        duration=93,
-        owner=48,
+        recipe_id=uuid.uuid4(),
+        culture=93,
+        user_id=48,
         name=0.33894476,
         rating=51.39916678,
     )

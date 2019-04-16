@@ -4,37 +4,37 @@ from grow_easily_server.domain.module import Module, Controller, PeriodicEvent
 
 class Recipe(object):
 
-    def __init__(self, code, owner, name, duration, rating, items=None):
-        self.code = code
-        self.owner = owner
+    def __init__(self, recipe_id, user_id, name, culture, rating, modules=None):
+        self.recipe_id = recipe_id
+        self.user_id = user_id
         self.name = name
-        self.duration = duration
+        self.culture = culture
         self.rating = rating
-        self.items = []
+        self.modules = []
 
-        if items:
-            for i in items:
+        if modules:
+            for i in modules:
                 self.add_item(i)
 
     @classmethod
     def from_dict(cls, adict):
-        recipe = Recipe(code=adict['code'],
-                        owner=adict['owner'],
+        recipe = Recipe(recipe_id=adict['recipe_id'],
+                        user_id=adict['user_id'],
                         name=adict['name'],
-                        duration=adict['duration'],
+                        culture=adict['culture'],
                         rating=adict['rating'],
-                        items=adict['items'])
+                        modules=adict['modules'])
 
         return recipe
 
     def to_dict(self):
         return {
-            'code': self.code,
-            'duration': self.duration,
-            'owner': self.owner,
+            'recipe_id': self.recipe_id,
+            'culture': self.culture,
+            'user_id': self.user_id,
             'rating': self.rating,
             'name': self.name,
-            'items': ''.join(self.items),
+            'modules': ''.join(self.modules),
         }
 
     def __eq__(self, other):
@@ -43,23 +43,23 @@ class Recipe(object):
     def add_item(self, item):
         if issubclass(type(item), Module):
             if not self.__is_duplicate_and_substituted(item):
-                self.items.append(item)
+                self.modules.append(item)
         else:
             raise TypeError("new item should be passed as RecipeItem object")
 
     def __is_duplicate_and_substituted(self, item):
         if type(item.trigger) is Controller or type(item.trigger) is PeriodicEvent:
-            for n, i in enumerate(self.items):
+            for n, i in enumerate(self.modules):
                 if isinstance(i.hardware, type(item.hardware)) and \
                    item.hardware.hw_type is i.hardware.hw_type:
-                    self.items[n] = item
+                    self.modules[n] = item
                     return True
 
-    def get_items(self):
-        return self.items
+    def get_modules(self):
+        return self.modules
 
     def generate(self):
-        return str(self.items)
+        return str(self.modules)
 
 
 DomainModel.register(Recipe)

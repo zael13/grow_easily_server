@@ -115,7 +115,7 @@ def test_repository_list_with_wrong_item_type(recipe_dicts):
 #     repo = dynamodb.Dynamodb(User)
 #
 #     _check_results(
-#         repo.list(filters={'owner': 60}),
+#         repo.list(filters={'user_id': 60}),
 #         [recipe_dicts[2]]
 #     )
 #
@@ -149,7 +149,7 @@ def test_repository_list_with_wrong_item_type(recipe_dicts):
 #     repo = dynamodb.Dynamodb(User)
 #
 #     _check_results(
-#         repo.list(filters={'duration': 93}),
+#         repo.list(filters={'culture': 93}),
 #         [recipe_dicts[3]]
 #     )
 #

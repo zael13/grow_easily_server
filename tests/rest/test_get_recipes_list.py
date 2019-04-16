@@ -17,12 +17,12 @@ item = Module(uuid.uuid4(),
 
 
 recipe1_dict = {
-    'code': '3251a5bd-86be-428d-8ae9-6e51a8048c33',
-    'duration': 200,
-    'owner': 10,
+    'recipe_id': '3251a5bd-86be-428d-8ae9-6e51a8048c33',
+    'culture': 200,
+    'user_id': 10,
     'name': -0.09998975,
     'rating': 51.75436293,
-    'items': [item]
+    'modules': [item]
 }
 
 
