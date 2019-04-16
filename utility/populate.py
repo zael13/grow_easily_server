@@ -226,7 +226,8 @@ triggerTable = dynamodb.Table('Trigger')
 triggerTable.put_item(
 	Item={
         'triggerId': str(trigger1),
-        'type': "PeriodicEvent",
+        'moduleId': str(module1),
+        'name': "PeriodicEvent",
 		'startTime': 1555331650,
 		'endTime': 1555331650,
         'delta': Decimal(2.0),
@@ -236,7 +237,8 @@ triggerTable.put_item(
 triggerTable.put_item(
 	Item={
         'triggerId': str(trigger2),
-        'type': "DailyEvent",
+        'moduleId': str(module1),
+        'name': "DailyEvent",
 		'startTime': 1555331650,
 		'endTime': 1555331650,
         'delta': Decimal(2.0),

@@ -9,6 +9,7 @@ class TriggerEncoder(json.JSONEncoder):
             if isinstance(o, Trigger):
                 to_serialize = {
                     'triggerId': str(o.triggerId),
+                    'moduleId': str(o.moduleId),
                     'name': o.name,
                     'startTime': o.startTime,
                     'endTime': o.endTime,

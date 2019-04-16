@@ -13,18 +13,20 @@ START_TIME = datetime(2007, 12, 5, 22, 30).timestamp()
 
 def test_serialize_domain_trigger():
     trigger_id = str(uuid.uuid4())
-    trigger = Trigger(trigger_id, name="daily", start_time=Decimal(START_TIME),
+    module_id = str(uuid.uuid4())
+    trigger = Trigger(trigger_id, module_id, name="daily", start_time=Decimal(START_TIME),
                       end_time=Decimal(START_TIME+0.1), delta=5)
 
     expected_json = """
         {{
             "triggerId": "{}",
+            "moduleId": "{}",
             "name": "daily",
             "startTime": {},
             "endTime": {},
             "delta": 5
         }}
-    """.format(trigger_id, Decimal(START_TIME), Decimal(START_TIME+0.1))
+    """.format(trigger_id, module_id, Decimal(START_TIME), Decimal(START_TIME+0.1))
 
     json_trigger = json.dumps(trigger, cls=srs.TriggerEncoder)
 
@@ -40,7 +42,8 @@ def test_serialize_domain_trigger_wrong_type():
 
 def test_serialize_domain_trigger_with_wrong_type():
     trigger_id = str(uuid.uuid4())
-    trigger = Trigger(trigger_id, name="daily", start_time=Decimal(START_TIME),
+    module_id = str(uuid.uuid4())
+    trigger = Trigger(trigger_id, module_id, name="daily", start_time=Decimal(START_TIME),
                       end_time=Decimal(START_TIME+0.1), delta=5)
 
     delattr(trigger, 'name')

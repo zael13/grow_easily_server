@@ -153,22 +153,22 @@ table = dynamodb.create_table(
     TableName='Trigger',
     KeySchema=[
         {
-            'AttributeName': 'type',
+            'AttributeName': 'moduleId',
             'KeyType': 'HASH'  #Partition key
         },
         {
-            'AttributeName': 'delta',
+            'AttributeName': 'triggerId',
             'KeyType': 'RANGE'  #Sort key
         }
     ],
     AttributeDefinitions=[
         {
-            'AttributeName': 'type',
+            'AttributeName': 'moduleId',
             'AttributeType': 'S'
         },
         {
-            'AttributeName': 'delta',
-            'AttributeType': 'N'
+            'AttributeName': 'triggerId',
+            'AttributeType': 'S'
         }
     ],
     ProvisionedThroughput={
@@ -197,7 +197,35 @@ table = dynamodb.create_table(
             'AttributeType': 'S'
         },
         {
+            'AttributeName': 'usermoduleId',
+            'AttributeType': 'S'
+        },
+        {
+            'AttributeName': 'triggerId',
+            'AttributeType': 'S'
+        }
+    ],
+    ProvisionedThroughput={
+        'ReadCapacityUnits': 10,
+        'WriteCapacityUnits': 10
+    }
+)
+
+
+
+table = dynamodb.create_table(
+    TableName='Hardware',
+    KeySchema=[
+        {
+            'AttributeName': 'type',
+            'KeyType': 'HASH'  #Partition key
+        },
+        {
             'AttributeName': 'userId',
+            'KeyType': 'RANGE'  #Sort key
+        }
+    ],
+    AttributeDefinitions=[Id',
             'AttributeType': 'S'
         }
     ],
