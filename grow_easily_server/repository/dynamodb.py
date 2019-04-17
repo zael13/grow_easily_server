@@ -1,4 +1,3 @@
-# from grow_easily_server.domain import recipe as sr
 import boto3
 from boto3.dynamodb.conditions import Key
 
@@ -6,10 +5,11 @@ from boto3.dynamodb.conditions import Key
 class Dynamodb:
     def __init__(self, db_objects_type):
         self.db_objects_type = db_objects_type
+        self.name = db_objects_type.__name__
         self.dynamodb = boto3.resource('dynamodb',
                                        endpoint_url='http://localhost:8000',
                                        region_name='us-west-2')
-        self.table = self.dynamodb.Table(db_objects_type.__name__)
+        self.table = self.dynamodb.Table(self.name)
 
     def list(self, filters=None):
         if not filters:

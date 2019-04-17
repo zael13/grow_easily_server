@@ -1,3 +1,4 @@
+import uuid
 from grow_easily_server.domain import user
 from grow_easily_server.shared import use_case as uc
 from grow_easily_server.shared import response_object as res
@@ -19,7 +20,9 @@ class ItemAddUseCase(uc.UseCase):
         self.repo = repo
 
     def process_request(self, request_object):
-        self.repo.insert(self.repo.db_objects_type.from_dict(request_object.filters))
+        obj_dict = request_object.filters
+        obj_dict[str(self.repo.name).lower() + "_id"] = str(uuid.uuid4())
+        self.repo.insert(self.repo.db_objects_type.from_dict(obj_dict))
         return res.ResponseSuccess(value="Item has been successfully created")
 
 
