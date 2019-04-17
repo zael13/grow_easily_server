@@ -40,14 +40,21 @@ def parse_request_object():
 
 
 def str_to_class(str):
-    return getattr(sys.modules[__name__], str)
+    try:
+        return getattr(sys.modules[__name__], str)
+    except AttributeError:
+        return None
 
 
 @blueprint.route('/find_<item>', methods=['GET'])
 def find_item(item):
+    table = str_to_class(item.capitalize())
+    if not table:
+        return Response("There is no such item: " + item)
+
     request_object = parse_request_object()
-    repo = dbr.Dynamodb(str_to_class(item.capitalize()))
-    use_case = uc.UserListUseCase(repo)
+    repo = dbr.Dynamodb(table)
+    use_case = uc.ItemListUseCase(repo)
     response = use_case.execute(request_object)
 
     return Response(json.dumps(response.value, cls=ser.ItemEncoder),
@@ -57,9 +64,13 @@ def find_item(item):
 
 @blueprint.route('/add_<item>', methods=['GET'])
 def add_user(item):
+    table = str_to_class(item.capitalize())
+    if not table:
+        return Response("There is no such item: " + item)
+
     request_object = parse_request_object()
-    repo = dbr.Dynamodb(str_to_class(item.capitalize()))
-    use_case = uc.UserAddUseCase(repo)
+    repo = dbr.Dynamodb(table)
+    use_case = uc.ItemAddUseCase(repo)
     response = use_case.execute(request_object)
 
     return Response(json.dumps(response.value, cls=ser.ItemEncoder),

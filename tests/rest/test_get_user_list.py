@@ -30,7 +30,7 @@ users = [user1_domain_model]
 
 
 @mock.patch(
-    'grow_easily_server.use_cases.user_use_cases.UserListUseCase')
+    'grow_easily_server.use_cases.user_use_cases.ItemListUseCase')
 def test_get(mock_use_case, client):
     mock_use_case().execute.return_value = res.ResponseSuccess(users)
 
@@ -43,7 +43,7 @@ def test_get(mock_use_case, client):
 
 
 @mock.patch(
-    'grow_easily_server.use_cases.user_use_cases.UserListUseCase')
+    'grow_easily_server.use_cases.user_use_cases.ItemListUseCase')
 def test_get_failed_response(mock_use_case, client):
     mock_use_case().execute.return_value = \
         res.ResponseFailure.build_system_error('test message')
@@ -57,7 +57,7 @@ def test_get_failed_response(mock_use_case, client):
 
 
 @mock.patch(
-    'grow_easily_server.use_cases.user_use_cases.UserListUseCase')
+    'grow_easily_server.use_cases.user_use_cases.ItemListUseCase')
 def test_request_object_initialisation_and_use_with_filters(
         mock_use_case, client):
     mock_use_case().execute.return_value = res.ResponseSuccess([])
@@ -77,7 +77,7 @@ def test_request_object_initialisation_and_use_with_filters(
 
 
 @mock.patch(
-    'grow_easily_server.use_cases.user_use_cases.UserAddUseCase')
+    'grow_easily_server.use_cases.user_use_cases.ItemAddUseCase')
 def test_get_add_user(mock_use_case, client):
     mock_use_case().execute.return_value = res.ResponseSuccess("User has been successfully created")
 

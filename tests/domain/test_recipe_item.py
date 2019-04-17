@@ -96,30 +96,30 @@ def test_hardware_should_set_all_internal_values_according_init_arguments():
     assert (hw.pins == [1, 2, 16])
 
 
-def test_module_item_should_raise_an_exception_if_name_is_not_string_type():
-    hw = Hardware(uuid.uuid4(), "test module", HWType.DHT_TEMPERATURE, [1, 2, 16])
-    event = PeriodicEvent(HWType.DHT_TEMPERATURE, ONE_HOUR)
-    with pytest.raises(TypeError):
-        Module(uuid.uuid4(), 1, event, hw)
-
-
-def test_module_item_should_raise_an_exception_if_name_is_empty():
-    hw = Hardware(uuid.uuid4(), "test module", HWType.DHT_TEMPERATURE, [1, 2, 16])
-    event = PeriodicEvent(HWType.DHT_TEMPERATURE, ONE_HOUR)
-    with pytest.raises(ValueError):
-        Module(uuid.uuid4(), "", event, hw)
-
-
-def test_module_item_should_raise_an_exception_if_event_is_wrong_type():
-    hw = Hardware(uuid.uuid4(), "test module", HWType.DHT_TEMPERATURE, [1, 2, 16])
-    with pytest.raises(TypeError):
-        Module(uuid.uuid4(), "test module", 1, hw)
-
-
-def test_module_item_should_raise_an_exception_if_hardware_is_wrong_type():
-    event = PeriodicEvent(HWType.DHT_TEMPERATURE, ONE_HOUR)
-    with pytest.raises(TypeError):
-        Module(uuid.uuid4(), "test module", event, "hw")
+# def test_module_item_should_raise_an_exception_if_name_is_not_string_type():
+#     hw = Hardware(uuid.uuid4(), "test module", HWType.DHT_TEMPERATURE, [1, 2, 16])
+#     event = PeriodicEvent(HWType.DHT_TEMPERATURE, ONE_HOUR)
+#     with pytest.raises(TypeError):
+#         Module(uuid.uuid4(), 1, event, hw)
+#
+#
+# def test_module_item_should_raise_an_exception_if_name_is_empty():
+#     hw = Hardware(uuid.uuid4(), "test module", HWType.DHT_TEMPERATURE, [1, 2, 16])
+#     event = PeriodicEvent(HWType.DHT_TEMPERATURE, ONE_HOUR)
+#     with pytest.raises(ValueError):
+#         Module(uuid.uuid4(), "", event, hw)
+#
+#
+# def test_module_item_should_raise_an_exception_if_event_is_wrong_type():
+#     hw = Hardware(uuid.uuid4(), "test module", HWType.DHT_TEMPERATURE, [1, 2, 16])
+#     with pytest.raises(TypeError):
+#         Module(uuid.uuid4(), "test module", 1, hw)
+#
+#
+# def test_module_item_should_raise_an_exception_if_hardware_is_wrong_type():
+#     event = PeriodicEvent(HWType.DHT_TEMPERATURE, ONE_HOUR)
+#     with pytest.raises(TypeError):
+#         Module(uuid.uuid4(), "test module", event, "hw")
 
 
 # def test_module_item_should_raise_an_exception_if_data_type_is_not_type():

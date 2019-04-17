@@ -74,7 +74,7 @@ def test_user_list_without_parameters(domain_users):
     repo = mock.Mock()
     repo.list.return_value = domain_users
 
-    user_list_use_case = uc.UserListUseCase(repo)
+    user_list_use_case = uc.ItemListUseCase(repo)
     request_object = req.RecipeListRequestObject.from_dict({})
 
     response_object = user_list_use_case.execute(request_object)
@@ -89,7 +89,7 @@ def test_user_list_with_filters(domain_users):
     repo = mock.Mock()
     repo.list.return_value = domain_users
 
-    user_list_use_case = uc.UserListUseCase(repo)
+    user_list_use_case = uc.ItemListUseCase(repo)
     qry_filters = {'a': 5}
     request_object = req.RecipeListRequestObject.from_dict({'filters': qry_filters})
 
@@ -104,7 +104,7 @@ def test_user_list_handles_generic_error():
     repo = mock.Mock()
     repo.list.side_effect = Exception('Just an error message')
 
-    user_list_use_case = uc.UserListUseCase(repo)
+    user_list_use_case = uc.ItemListUseCase(repo)
     request_object = req.RecipeListRequestObject.from_dict({})
 
     response_object = user_list_use_case.execute(request_object)
@@ -119,7 +119,7 @@ def test_user_list_handles_generic_error():
 def test_user_list_handles_bad_request():
     repo = mock.Mock()
 
-    user_list_use_case = uc.UserListUseCase(repo)
+    user_list_use_case = uc.ItemListUseCase(repo)
     request_object = req.RecipeListRequestObject.from_dict({'filters': 5})
 
     response_object = user_list_use_case.execute(request_object)

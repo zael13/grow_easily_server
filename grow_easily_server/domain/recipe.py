@@ -10,11 +10,11 @@ class Recipe(object):
         self.name = name
         self.culture = culture
         self.rating = rating
-        self.modules = modules
 
-        # if modules:
-        #     for i in modules:
-        #         self.add_item(i)
+        if modules:
+            self.modules = modules
+        else:
+            self.modules = []
 
     @classmethod
     def from_dict(cls, adict):

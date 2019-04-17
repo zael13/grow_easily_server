@@ -3,7 +3,7 @@ from grow_easily_server.shared import use_case as uc
 from grow_easily_server.shared import response_object as res
 
 
-class UserListUseCase(uc.UseCase):
+class ItemListUseCase(uc.UseCase):
 
     def __init__(self, repo):
         self.repo = repo
@@ -11,6 +11,16 @@ class UserListUseCase(uc.UseCase):
     def process_request(self, request_object):
         domain_item = self.repo.list(filters=request_object.filters)
         return res.ResponseSuccess(domain_item)
+
+
+class ItemAddUseCase(uc.UseCase):
+
+    def __init__(self, repo):
+        self.repo = repo
+
+    def process_request(self, request_object):
+        self.repo.insert(self.repo.db_objects_type.from_dict(request_object.filters))
+        return res.ResponseSuccess(value="Item has been successfully created")
 
 
 class UserAddUseCase(uc.UseCase):
