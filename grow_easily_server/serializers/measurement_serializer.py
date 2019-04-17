@@ -1,9 +1,8 @@
-import json
 from grow_easily_server.domain.measurement import Measurement
-import decimal
+from grow_easily_server.serializers.decimal_serializer import DecimalEncoder
 
 
-class MeasurementEncoder(json.JSONEncoder):
+class MeasurementEncoder(DecimalEncoder):
     def default(self, o):
         try:
             if isinstance(o, Measurement):
@@ -24,11 +23,6 @@ class MeasurementEncoder(json.JSONEncoder):
                     'custom2': o.custom2,
                     'custom3': o.custom3
                 }
-            elif isinstance(o, decimal.Decimal):
-                if o % 1 == 0:
-                    return int(o)
-                else:
-                    return float(o)
             else:
                 to_serialize = super().default(o)
             return to_serialize

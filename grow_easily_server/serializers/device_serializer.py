@@ -1,9 +1,7 @@
-import json
 from grow_easily_server.domain.device import Device
-import decimal
+from grow_easily_server.serializers.decimal_serializer import DecimalEncoder
 
-
-class DeviceEncoder(json.JSONEncoder):
+class DeviceEncoder(DecimalEncoder):
     def default(self, o):
         try:
             if isinstance(o, Device):
@@ -14,11 +12,6 @@ class DeviceEncoder(json.JSONEncoder):
                     'name': o.name,
                     'start_time': o.start_time
                 }
-            elif isinstance(o, decimal.Decimal):
-                if o % 1 == 0:
-                    return int(o)
-                else:
-                    return float(o)
             else:
                 to_serialize = super().default(o)
             return to_serialize

@@ -1,9 +1,8 @@
-import json
 from grow_easily_server.domain.hardware import Hardware
-import decimal
+from grow_easily_server.serializers.decimal_serializer import DecimalEncoder
 
 
-class HardwareEncoder(json.JSONEncoder):
+class HardwareEncoder(DecimalEncoder):
     def default(self, o):
         try:
             if isinstance(o, Hardware):
@@ -17,11 +16,6 @@ class HardwareEncoder(json.JSONEncoder):
                     'value': o.value,
                     'delta': o.delta
                 }
-            elif isinstance(o, decimal.Decimal):
-                if o % 1 == 0:
-                    return int(o)
-                else:
-                    return float(o)
             else:
                 to_serialize = super().default(o)
             return to_serialize

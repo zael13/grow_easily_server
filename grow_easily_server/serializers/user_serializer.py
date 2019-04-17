@@ -1,9 +1,8 @@
-import json
 from grow_easily_server.domain.user import User
-import decimal
+from grow_easily_server.serializers.decimal_serializer import DecimalEncoder
 
 
-class UserEncoder(json.JSONEncoder):
+class UserEncoder(DecimalEncoder):
     def default(self, o):
         try:
             if isinstance(o, User):
@@ -19,11 +18,6 @@ class UserEncoder(json.JSONEncoder):
                     'gender': o.gender,
                     'rating': str(o.rating)
                 }
-            elif isinstance(o, decimal.Decimal):
-                if o % 1 == 0:
-                    return int(o)
-                else:
-                    return float(o)
             else:
                 to_serialize = super().default(o)
             return to_serialize

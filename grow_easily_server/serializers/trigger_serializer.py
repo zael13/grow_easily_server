@@ -1,9 +1,8 @@
-import json
 from grow_easily_server.domain.trigger import Trigger
-import decimal
+from grow_easily_server.serializers.decimal_serializer import DecimalEncoder
 
 
-class TriggerEncoder(json.JSONEncoder):
+class TriggerEncoder(DecimalEncoder):
     def default(self, o):
         try:
             if isinstance(o, Trigger):
@@ -15,11 +14,6 @@ class TriggerEncoder(json.JSONEncoder):
                     'end_time': o.end_time,
                     'delta': o.delta
                 }
-            elif isinstance(o, decimal.Decimal):
-                if o % 1 == 0:
-                    return int(o)
-                else:
-                    return float(o)
             else:
                 to_serialize = super().default(o)
             return to_serialize

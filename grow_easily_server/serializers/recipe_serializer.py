@@ -1,10 +1,9 @@
-import json
-import decimal
 from grow_easily_server.domain.recipe import Recipe
 from grow_easily_server.domain.module import Module, Hardware, PeriodicEvent, HWType
+from grow_easily_server.serializers.decimal_serializer import DecimalEncoder
 
 
-class RecipeEncoder(json.JSONEncoder):
+class RecipeEncoder(DecimalEncoder):
     def default(self, o):
         try:
             if isinstance(o, Recipe):
@@ -40,11 +39,6 @@ class RecipeEncoder(json.JSONEncoder):
                 }
             elif isinstance(o, HWType):
                 to_serialize = str(o.name)  # {'hw_type': str(o.name)}
-            elif isinstance(o, decimal.Decimal):
-                if o % 1 == 0:
-                    return int(o)
-                else:
-                    return float(o)
             else:
                 to_serialize = super().default(o)
             return to_serialize
