@@ -122,27 +122,27 @@ def test_module_item_should_raise_an_exception_if_hardware_is_wrong_type():
         Module(uuid.uuid4(), "test module", event, "hw")
 
 
-def test_module_item_should_raise_an_exception_if_data_type_is_not_type():
-    event = PeriodicEvent(HWType.DHT_TEMPERATURE, ONE_HOUR)
-    hw = Hardware(uuid.uuid4(), "test module", HWType.DHT_TEMPERATURE, [1, 2, 16])
-
-    with pytest.raises(TypeError):
-        Module(uuid.uuid4(), "test module", event, hw, "string")
+# def test_module_item_should_raise_an_exception_if_data_type_is_not_type():
+#     event = PeriodicEvent(HWType.DHT_TEMPERATURE, ONE_HOUR)
+#     hw = Hardware(uuid.uuid4(), "test module", HWType.DHT_TEMPERATURE, [1, 2, 16])
+#
+#     with pytest.raises(TypeError):
+#         Module(uuid.uuid4(), "test module", event, hw, "string")
 
 
 def test_module_should_set_all_internal_values_according_init_arguments():
-    code = uuid.uuid4()
+    module_id = uuid.uuid4()
     event = PeriodicEvent(HWType.DHT_TEMPERATURE, ONE_HOUR)
     hw = Hardware(uuid.uuid4(), "test module", HWType.DHT_TEMPERATURE, [1, 2, 16])
-    m = Module(code, "test module", event, hw, type(1))
+    m = Module(module_id, "test module", event, hw, 20)
 
     print("Test 1")
     print(m)
     print("Test 2")
     print([m, m])
 
-    assert (m.code == code)
+    assert (m.module_id == module_id)
     assert (m.name == "test module")
-    assert (m.trigger == event)
-    assert (m.hardware == hw)
-    assert (isinstance(m.data_type, type(int)))
+    assert (m.trigger_id == event)
+    assert (m.hardware_id1 == hw)
+    assert (m.value == 20)

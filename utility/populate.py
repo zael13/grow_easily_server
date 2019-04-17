@@ -137,7 +137,7 @@ recipeTable.put_item(
         'recipe_id': str(recipe1),
 		'user_id': str(maxId),
 		'name': "Tomato",
-		'rank': Decimal(5.0),
+		'rating': Decimal(5.0),
 		'culture': "tomatoes",
 		'length': 2,
 		'modules': [str(module1), str(module2)],
@@ -149,7 +149,7 @@ recipeTable.put_item(
         'recipe_id': str(uuid.uuid4()),
 		'user_id': str(maxId),
 		'name': "Potaito",
-		'rank': Decimal(5.0),
+		'rating': Decimal(5.0),
 		'culture': "potaito",
 		'length': 0,
 		'modules': None,
@@ -161,7 +161,7 @@ recipeTable.put_item(
         'recipe_id': str(recipe1),
 		'user_id': str(dianaId),
 		'name': "Salad",
-		'rank': Decimal(5.0),
+		'rating': Decimal(4.5),
 		'culture': "salad",
 		'length': 1,
 		'modules': str(module1),
@@ -173,10 +173,11 @@ moduleTable = dynamodb.Table('Module')
 moduleTable.put_item(
 	Item={
         'module_id': str(module1),
+        'recipe_id': str(recipe1),
         'name': "Temperature",
 		'trigger_id': str(trigger1),
-		'name': "Tomato",
-		'hardwareId1': str(hardware1),
+		'hardware_id1': str(hardware1),
+        'hardware_id2': str(hardware1),
 		'value': Decimal(20.0),
         'delta': Decimal(2.0),
 	}
@@ -185,13 +186,13 @@ moduleTable.put_item(
 moduleTable.put_item(
 	Item={
         'module_id': str(module2),
+        'recipe_id': str(recipe2),
         'name': "Moisure",
 		'trigger_id': str(trigger2),
-		'hardwareId1': str(hardware1),
-		'hardwareId2': str(hardware2),
+		'hardware_id1': str(hardware1),
+		'hardware_id2': str(hardware2),
         'value': Decimal(60.0),
         'delta': Decimal(5.0),
-		'user_id': str(maxId),
 	}
 )
 

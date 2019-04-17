@@ -124,7 +124,7 @@ table = dynamodb.create_table(
     TableName='Module',
     KeySchema=[
         {
-            'AttributeName': 'trigger_id',
+            'AttributeName': 'module_id',
             'KeyType': 'HASH'  #Partition key
         },
         {
@@ -134,7 +134,7 @@ table = dynamodb.create_table(
     ],
     AttributeDefinitions=[
         {
-            'AttributeName': 'trigger_id',
+            'AttributeName': 'module_id',
             'AttributeType': 'S'
         },
         {

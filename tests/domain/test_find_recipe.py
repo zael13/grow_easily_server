@@ -120,7 +120,7 @@ def test_add_the_controller_of_the_same_type_twice_should_substitute_old_value_w
     recipe.add_item(m3)
 
     assert(len(recipe.get_modules()) == 2)
-    assert(recipe.modules[0].trigger.value == 2)
+    assert(recipe.modules[0].trigger_id.value == 2)
 
 # def test_add_the_calendar_event_of_the_same_type_twice_should_not_substitute_old_value():
 #     recipe = Recipe(uuid.uuid4(), user_id=10, name=-0.09998975, culture=200, rating=51.75436293)

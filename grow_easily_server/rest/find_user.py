@@ -104,3 +104,73 @@ def find_trigger():
                     mimetype='application/json',
                     status=STATUS_CODES[response.type])
 
+
+from grow_easily_server.serializers import recipe_serializer as ser4
+from grow_easily_server.domain import recipe
+
+
+@blueprint.route('/find_recipe', methods=['GET'])
+def find_recipe():
+    request_object = parse_request_object()
+
+    repo = dbr.Dynamodb(recipe.Recipe)
+    use_case = uc.UserListUseCase(repo)
+
+    response = use_case.execute(request_object)
+
+    return Response(json.dumps(response.value, cls=ser4.RecipeEncoder),
+                    mimetype='application/json',
+                    status=STATUS_CODES[response.type])
+
+
+from grow_easily_server.domain import module
+
+
+@blueprint.route('/find_module', methods=['GET'])
+def find_module():
+    request_object = parse_request_object()
+
+    repo = dbr.Dynamodb(module.Module)
+    use_case = uc.UserListUseCase(repo)
+
+    response = use_case.execute(request_object)
+
+    return Response(json.dumps(response.value, cls=ser4.RecipeEncoder),
+                    mimetype='application/json',
+                    status=STATUS_CODES[response.type])
+
+
+from grow_easily_server.serializers import hardware_serializer as ser5
+from grow_easily_server.domain import hardware
+
+
+@blueprint.route('/find_hardware', methods=['GET'])
+def find_hardware():
+    request_object = parse_request_object()
+
+    repo = dbr.Dynamodb(hardware.Hardware)
+    use_case = uc.UserListUseCase(repo)
+
+    response = use_case.execute(request_object)
+
+    return Response(json.dumps(response.value, cls=ser5.HardwareEncoder),
+                    mimetype='application/json',
+                    status=STATUS_CODES[response.type])
+
+
+from grow_easily_server.serializers import measurement_serializer as ser6
+from grow_easily_server.domain import measurement
+
+
+@blueprint.route('/find_measurement', methods=['GET'])
+def find_measurement():
+    request_object = parse_request_object()
+
+    repo = dbr.Dynamodb(measurement.Measurement)
+    use_case = uc.UserListUseCase(repo)
+
+    response = use_case.execute(request_object)
+
+    return Response(json.dumps(response.value, cls=ser6.MeasurementEncoder),
+                    mimetype='application/json',
+                    status=STATUS_CODES[response.type])

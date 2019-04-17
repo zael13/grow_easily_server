@@ -1,4 +1,5 @@
 import json
+import decimal
 from grow_easily_server.domain.recipe import Recipe
 from grow_easily_server.domain.module import Module, Hardware, PeriodicEvent, HWType
 
@@ -17,11 +18,11 @@ class RecipeEncoder(json.JSONEncoder):
                 }
             elif isinstance(o, Module):
                 to_serialize = {
-                    'recipe_id': str(o.code),
+                    'module_id': str(o.module_id),
                     'name': o.name,
-                    'trigger': o.trigger,
-                    'hardware': o.hardware,
-                    'data_type': str(o.data_type),
+                    'trigger_id': o.trigger_id,
+                    'hardware_id1': o.hardware_id1,
+                    'value': str(o.value),
                 }
             elif isinstance(o, Hardware):
                 to_serialize = {
@@ -39,6 +40,11 @@ class RecipeEncoder(json.JSONEncoder):
                 }
             elif isinstance(o, HWType):
                 to_serialize = str(o.name)  # {'hw_type': str(o.name)}
+            elif isinstance(o, decimal.Decimal):
+                if o % 1 == 0:
+                    return int(o)
+                else:
+                    return float(o)
             else:
                 to_serialize = super().default(o)
             return to_serialize

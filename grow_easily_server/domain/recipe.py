@@ -10,11 +10,11 @@ class Recipe(object):
         self.name = name
         self.culture = culture
         self.rating = rating
-        self.modules = []
+        self.modules = modules
 
-        if modules:
-            for i in modules:
-                self.add_item(i)
+        # if modules:
+        #     for i in modules:
+        #         self.add_item(i)
 
     @classmethod
     def from_dict(cls, adict):
@@ -23,8 +23,7 @@ class Recipe(object):
                         name=adict['name'],
                         culture=adict['culture'],
                         rating=adict['rating'],
-                        modules=adict['modules'])
-
+                        modules=adict['modules'] if ('modules' in adict) else None)
         return recipe
 
     def to_dict(self):
@@ -48,10 +47,10 @@ class Recipe(object):
             raise TypeError("new item should be passed as RecipeItem object")
 
     def __is_duplicate_and_substituted(self, item):
-        if type(item.trigger) is Controller or type(item.trigger) is PeriodicEvent:
+        if type(item.trigger_id) is Controller or type(item.trigger_id) is PeriodicEvent:
             for n, i in enumerate(self.modules):
-                if isinstance(i.hardware, type(item.hardware)) and \
-                   item.hardware.hw_type is i.hardware.hw_type:
+                if isinstance(i.hardware_id1, type(item.hardware_id1)) and \
+                   item.hardware_id1.hw_type is i.hardware_id1.hw_type:
                     self.modules[n] = item
                     return True
 

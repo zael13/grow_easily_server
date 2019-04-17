@@ -3,14 +3,16 @@ from enum import Enum
 
 
 class Module:
-    def __init__(self, code, name, trigger, hardware, data_type=type(str)):
-        self.__check_input_values(name, trigger, hardware, data_type)
+    def __init__(self, module_id, name, trigger_id, hardware_id1, value=None, delta=None, hardware_id2=None):
+        # self.__check_input_values(name, trigger_id, hardware_id1, value)
 
-        self.code = code
+        self.module_id = module_id
         self.name = name
-        self.trigger = trigger
-        self.hardware = hardware
-        self.data_type = data_type
+        self.trigger_id = trigger_id
+        self.hardware_id1 = hardware_id1
+        self.value = value
+        self.delta = delta
+        self.hardware_id2 = hardware_id2
 
     @staticmethod
     def __check_input_values(name, trigger, hardware, data_type):
@@ -22,8 +24,33 @@ class Module:
             raise TypeError("Trigger argument should be Trigger instance object")
         elif not isinstance(hardware, Hardware):
             raise TypeError("Hardware argument should be Hardware instance object")
-        elif type(data_type) is not type:
-            raise TypeError("Data_type argument should be type object")
+        # elif type(data_type) is not type:
+        #     raise TypeError("Data_type argument should be type object")
+
+    @classmethod
+    def from_dict(cls, adict):
+        module = Module(module_id=adict['module_id'],
+                        name=adict['name'],
+                        trigger_id=adict['trigger_id'],
+                        hardware_id1=adict['hardware_id1'],
+                        value=adict['value'] if ('value' in adict) else None,
+                        delta=adict['delta'] if ('delta' in adict) else None,
+                        hardware_id2=adict['hardware_id2'] if ('hardware_id2' in adict) else None)
+        return module
+
+    def to_dict(self):
+        return {
+            'module_id': self.module_id,
+            'name': self.name,
+            'trigger_id': self.trigger_id,
+            'hardware_id1': self.hardware_id1,
+            'value': self.value,
+            'delta': ''.join(self.delta),
+            'hardware_id2': ''.join(self.hardware_id2),
+        }
+
+    def __eq__(self, other):
+        return self.to_dict() == other.to_dict()
 
 
 class ImpactType(Enum):
