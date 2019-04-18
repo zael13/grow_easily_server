@@ -14,23 +14,20 @@ START_TIME = datetime(2007, 12, 5, 22, 30).timestamp()
 def test_serialize_domain_trigger():
     hardware_id = str(uuid.uuid4())
     module_id = str(uuid.uuid4())
-    user_id = str(uuid.uuid4())
-    hardware = Hardware(hardware_id, module_id, user_id, "Temperature1",
-                        "DHT_TEMPERATURE", [1, 2], 20.5, 2.0)
+    hardware = Hardware(hardware_id, module_id, "Temperature1", "DHT_TEMPERATURE", [1, 2], 20.5, 2.0)
 
 
     expected_json = """
         {{
             "hardware_id": "{}",
             "module_id": "{}",
-            "user_id": "{}",
             "name": "Temperature1",
             "hw_type": "DHT_TEMPERATURE",
             "pins": [1, 2],
             "value": 20.5,
             "delta": 2.0
         }}
-    """.format(hardware_id, module_id, user_id)
+    """.format(hardware_id, module_id)
 
     json_trigger = json.dumps(hardware, cls=srs.HardwareEncoder)
 
@@ -47,9 +44,7 @@ def test_serialize_domain_trigger_wrong_type():
 def test_serialize_domain_trigger_with_wrong_type():
     hardware_id = str(uuid.uuid4())
     module_id = str(uuid.uuid4())
-    user_id = str(uuid.uuid4())
-    hardware = Hardware(hardware_id, module_id, user_id, "Temperature1",
-                        "DHT_TEMPERATURE", [1, 2], 20.5, 2.0)
+    hardware = Hardware(hardware_id, module_id, "Temperature1", "DHT_TEMPERATURE", [1, 2], 20.5, 2.0)
 
     delattr(hardware, 'name')
 

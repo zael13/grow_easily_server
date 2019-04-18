@@ -9,7 +9,6 @@ class HardwareEncoder(DecimalEncoder):
                 to_serialize = {
                     'hardware_id': str(o.hardware_id),
                     'module_id': str(o.module_id),
-                    'user_id': str(o.user_id),
                     'name': o.name,
                     'hw_type': o.hw_type,
                     'pins': o.pins,
