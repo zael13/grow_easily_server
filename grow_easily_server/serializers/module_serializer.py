@@ -10,7 +10,7 @@ class ModuleEncoder(DecimalEncoder):
                 to_serialize = {
                     'module_id': str(o.module_id),
                     'name': o.name,
-                    'trigger_id': o.trigger_id,
+                    'recipe_id': o.recipe_id,
                     'hardware_id1': o.hardware_id1,
                     'value': str(o.value),
                 }

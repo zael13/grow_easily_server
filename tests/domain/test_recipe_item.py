@@ -132,9 +132,8 @@ def test_hardware_should_set_all_internal_values_according_init_arguments():
 
 def test_module_should_set_all_internal_values_according_init_arguments():
     module_id = uuid.uuid4()
-    event = PeriodicEvent(HWType.DHT_TEMPERATURE, ONE_HOUR)
-    hw = Hardware(uuid.uuid4(), "test module", HWType.DHT_TEMPERATURE, [1, 2, 16])
-    m = Module(module_id, "test module", event, hw, 20)
+    recipe_id = uuid.uuid4()
+    m = Module(module_id, recipe_id, "test module", 20, 2)
 
     print("Test 1")
     print(m)
@@ -143,6 +142,5 @@ def test_module_should_set_all_internal_values_according_init_arguments():
 
     assert (m.module_id == module_id)
     assert (m.name == "test module")
-    assert (m.trigger_id == event)
-    assert (m.hardware_id1 == hw)
     assert (m.value == 20)
+    assert (m.delta == 2)

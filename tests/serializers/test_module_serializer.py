@@ -40,11 +40,7 @@ def test_serialize_domain_recipe_wrong_type():
 
 
 def test_serialize_domain_recipe_with_wrong_type():
-    item = Module(uuid.uuid4(),
-                  "test module",
-                  PeriodicEvent(HWType.DHT_TEMPERATURE, timedelta(hours=5)),
-                  Hardware(uuid.uuid4(), "test hw", HWType.DHT_TEMPERATURE, [1, 2, 16]),
-                  type(1))
+    item = Module(uuid.uuid4(), PeriodicEvent(HWType.DHT_TEMPERATURE, timedelta(hours=5)), "test module", type(1))
 
     delattr(item, 'name')
 
