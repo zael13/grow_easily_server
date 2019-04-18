@@ -8,7 +8,6 @@ class DeviceEncoder(DecimalEncoder):
                 to_serialize = {
                     'device_id': str(o.device_id),
                     'user_id': str(o.user_id),
-                    'recipe_id': str(o.recipe_id),
                     'name': o.name,
                     'start_time': o.start_time
                 }

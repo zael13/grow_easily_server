@@ -14,19 +14,17 @@ START_TIME = datetime(2007, 12, 5, 22, 30).timestamp()
 def test_serialize_domain_device():
     device_id = str(uuid.uuid4())
     user_id = str(uuid.uuid4())
-    recipe_id = str(uuid.uuid4())
 
-    device = Device(device_id, user_id, recipe_id, name="dev1", start_time=Decimal(START_TIME))
+    device = Device(device_id, user_id, name="dev1", start_time=Decimal(START_TIME))
 
     expected_json = """
         {{
             "device_id": "{}",
             "user_id": "{}",
-            "recipe_id": "{}",
             "name": "dev1",
             "start_time": {}
         }}
-    """.format(device_id, user_id, recipe_id, Decimal(START_TIME))
+    """.format(device_id, user_id, Decimal(START_TIME))
 
     json_device = json.dumps(device, cls=srs.DeviceEncoder)
 
@@ -38,19 +36,17 @@ def test_serialize_domain_device():
 def test_serialize_domain_device_with_float():
     device_id = str(uuid.uuid4())
     user_id = str(uuid.uuid4())
-    recipe_id = str(uuid.uuid4())
 
-    device = Device(device_id, user_id, recipe_id, name="dev1", start_time=Decimal(1.1))
+    device = Device(device_id, user_id, name="dev1", start_time=Decimal(1.1))
 
     expected_json = """
         {{
             "device_id": "{}",
             "user_id": "{}",
-            "recipe_id": "{}",
             "name": "dev1",
             "start_time": {}
         }}
-    """.format(device_id, user_id, recipe_id, Decimal(1.1))
+    """.format(device_id, user_id, Decimal(1.1))
 
     json_device = json.dumps(device, cls=srs.DeviceEncoder)
 
@@ -67,8 +63,7 @@ def test_serialize_domain_device_wrong_type():
 def test_serialize_domain_device_with_wrong_type():
     device_id = str(uuid.uuid4())
     user_id = str(uuid.uuid4())
-    recipe_id = str(uuid.uuid4())
-    device = Device(device_id, user_id, recipe_id, name="dev1", start_time=START_TIME)
+    device = Device(device_id, user_id, name="dev1", start_time=START_TIME)
 
     delattr(device, 'name')
 

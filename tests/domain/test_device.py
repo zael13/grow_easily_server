@@ -8,12 +8,10 @@ START_TIME = datetime(2007, 12, 5, 22, 30).timestamp()
 def test_device_model_init():
     device_id = str(uuid.uuid4())
     user_id = str(uuid.uuid4())
-    recipe_id = str(uuid.uuid4())
-    device = Device(device_id, user_id, recipe_id, name="dev1", start_time=START_TIME)
+    device = Device(device_id, user_id, name="dev1", start_time=START_TIME)
 
     assert device.device_id == device_id
     assert device.user_id == user_id
-    assert device.recipe_id == recipe_id
     assert device.name == "dev1"
     assert device.start_time == START_TIME
 
@@ -21,12 +19,10 @@ def test_device_model_init():
 def test_device_model_from_dict():
     device_id = str(uuid.uuid4())
     user_id = str(uuid.uuid4())
-    recipe_id = str(uuid.uuid4())
     device = Device.from_dict(
         {
             'device_id': device_id,
             'user_id': user_id,
-            'recipe_id': recipe_id,
             'name': 'dev1',
             'start_time': START_TIME,
         }
@@ -34,7 +30,6 @@ def test_device_model_from_dict():
 
     assert device.device_id == device_id
     assert device.user_id == user_id
-    assert device.recipe_id == recipe_id
     assert device.name == "dev1"
     assert device.start_time == START_TIME
 
@@ -42,11 +37,9 @@ def test_device_model_from_dict():
 def test_device_model_to_dict():
     device_id = str(uuid.uuid4())
     user_id = str(uuid.uuid4())
-    recipe_id = str(uuid.uuid4())
     device_dict = {
         'device_id': device_id,
         'user_id': user_id,
-        'recipe_id': recipe_id,
         'name': 'dev1',
         'start_time': START_TIME,
     }
@@ -59,11 +52,9 @@ def test_device_model_to_dict():
 def test_device_model_comparison():
     device_id = str(uuid.uuid4())
     user_id = str(uuid.uuid4())
-    recipe_id = str(uuid.uuid4())
     device_dict = {
         'device_id': device_id,
         'user_id': user_id,
-        'recipe_id': recipe_id,
         'name': 'dev1',
         'start_time': START_TIME,
     }
