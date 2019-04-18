@@ -9,11 +9,11 @@ class RecipeEncoder(DecimalEncoder):
             if isinstance(o, Recipe):
                 to_serialize = {
                     'recipe_id': str(o.recipe_id),
-                    'culture': o.culture,
-                    'user_id': o.user_id,
-                    'rating': o.rating,
+                    'device_id': o.device_id,
                     'name': o.name,
-                    'modules': o.modules
+                    'culture': o.culture,
+                    'rating': o.rating,
+                    'duration': o.duration
                 }
             else:
                 to_serialize = super().default(o)

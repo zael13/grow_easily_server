@@ -10,7 +10,7 @@ def recipe_dicts():
         {
             'recipe_id': 'f853578c-fc0f-4e65-81b8-566c5dffa35a',
             'culture': 215,
-            'user_id': 39,
+            'device_id': 39,
             'name': -0.09998975,
             'rating': 51.75436293,
             'modules': '',
@@ -18,7 +18,7 @@ def recipe_dicts():
         {
             'recipe_id': 'fe2c3195-aeff-487a-a08f-e0bdc0ec6e9a',
             'culture': 405,
-            'user_id': 66,
+            'device_id': 66,
             'name': 0.18228006,
             'rating': 51.74640997,
             'modules': '',
@@ -26,7 +26,7 @@ def recipe_dicts():
         {
             'recipe_id': '913694c6-435a-4366-ba0d-da5334a611b2',
             'culture': 56,
-            'user_id': 60,
+            'device_id': 60,
             'name': 0.27891577,
             'rating': 51.45994069,
             'modules': '',
@@ -34,7 +34,7 @@ def recipe_dicts():
         {
             'recipe_id': 'eed76e77-55c1-41ce-985d-ca49bf6c0585',
             'culture': 93,
-            'user_id': 48,
+            'device_id': 48,
             'name': 0.33894476,
             'rating': 51.39916678,
             'modules': '',
@@ -69,39 +69,39 @@ def test_repository_list_with_filters_unknown_operator(recipe_dicts):
     repo = memrepo.MemRepo(recipe_dicts)
 
     with pytest.raises(ValueError):
-        repo.list(filters={'user_id__in': [20, 30]})
+        repo.list(filters={'device_id__in': [20, 30]})
 
 
-def test_repository_list_with_filters_user_id(recipe_dicts):
+def test_repository_list_with_filters_device_id(recipe_dicts):
     repo = memrepo.MemRepo(recipe_dicts)
 
     _check_results(
-        repo.list(filters={'user_id': 60}),
+        repo.list(filters={'device_id': 60}),
         [recipe_dicts[2]]
     )
 
 
-def test_repository_list_with_filters_user_id_eq(recipe_dicts):
+def test_repository_list_with_filters_device_id_eq(recipe_dicts):
     repo = memrepo.MemRepo(recipe_dicts)
 
     _check_results(
-        repo.list(filters={'user_id__eq': 60}),
+        repo.list(filters={'device_id__eq': 60}),
         [recipe_dicts[2]]
     )
 
 
-def test_repository_list_with_filters_user_id_lt(recipe_dicts):
+def test_repository_list_with_filters_device_id_lt(recipe_dicts):
     repo = memrepo.MemRepo(recipe_dicts)
 
     _check_results(
-        repo.list(filters={'user_id__lt': 60}),
+        repo.list(filters={'device_id__lt': 60}),
         [recipe_dicts[0], recipe_dicts[3]])
 
 
-def test_repository_list_with_filters_user_id_gt(recipe_dicts):
+def test_repository_list_with_filters_device_id_gt(recipe_dicts):
     repo = memrepo.MemRepo(recipe_dicts)
     _check_results(
-        repo.list(filters={'user_id__gt': 60}),
+        repo.list(filters={'device_id__gt': 60}),
         [recipe_dicts[1]]
     )
 
