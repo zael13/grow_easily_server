@@ -14,17 +14,17 @@ class Module:
         self.delta = delta
         self.hardware_id2 = hardware_id2
 
-    @staticmethod
-    def __check_input_values(name, trigger, hardware, data_type):
-        if type(name) is not str:
-            raise TypeError("Module name should be only String type")
-        elif not len(name):
-            raise ValueError("Module name should not be empty")
-        elif not isinstance(trigger, Trigger):
-            raise TypeError("Trigger argument should be Trigger instance object")
-        elif not isinstance(hardware, Hardware):
-            raise TypeError("Hardware argument should be Hardware instance object")
-        # elif type(data_type) is not type:
+    # @staticmethod
+    # def __check_input_values(name, trigger, hardware, data_type):
+    #     if type(name) is not str:
+    #         raise TypeError("Module name should be only String type")
+    #     elif not len(name):
+    #         raise ValueError("Module name should not be empty")
+    #     elif not isinstance(trigger, Trigger):
+    #         raise TypeError("Trigger argument should be Trigger instance object")
+    #     elif not isinstance(hardware, Hardware):
+    #         raise TypeError("Hardware argument should be Hardware instance object")
+    #     # elif type(data_type) is not type:
         #     raise TypeError("Data_type argument should be type object")
 
     @classmethod

@@ -95,7 +95,7 @@ table = dynamodb.create_table(
     TableName='Recipe',
     KeySchema=[
         {
-            'AttributeName': 'user_id',
+            'AttributeName': 'recipe_id',
             'KeyType': 'HASH'  #Partition key
         },
         {
@@ -105,7 +105,7 @@ table = dynamodb.create_table(
     ],
     AttributeDefinitions=[
         {
-            'AttributeName': 'user_id',
+            'AttributeName': 'recipe_id',
             'AttributeType': 'S'
         },
         {

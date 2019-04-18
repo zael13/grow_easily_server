@@ -131,6 +131,25 @@ def test_user_list_handles_bad_request():
     }
 
 
+def test_item_add_with_filters(domain_users):
+    repo = mock.Mock()
+    repo.list.return_value = []
+
+    user_add_use_case = uc.ItemAddUseCase(repo)
+    qry_filters = {'email': "test@gmail.com",
+                   'name': "test",
+                   'surname': "test",
+                   'password': "pass",
+                   'reg_date': 12345,
+                   'user_id': "12345"}
+    request_object = req.RecipeListRequestObject.from_dict({'filters': qry_filters})
+
+    response_object = user_add_use_case.execute(request_object)
+
+    assert bool(response_object) is True
+    assert response_object.value == "Item has been successfully created"
+
+
 def test_user_add_insert_an_item():
     repo = mock.Mock()
 
