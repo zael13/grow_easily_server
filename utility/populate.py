@@ -135,36 +135,33 @@ recipeTable = dynamodb.Table('Recipe')
 recipeTable.put_item(
 	Item={
         'recipe_id': str(recipe1),
-		'user_id': str(maxId),
+		'device_id': str(maxId),
 		'name': "Tomato",
 		'rating': Decimal(5.0),
 		'culture': "tomatoes",
-		'length': 2,
-		'modules': [str(module1), str(module2)],
+		'duration': 2,
 	}
 )
 
 recipeTable.put_item(
 	Item={
         'recipe_id': str(uuid.uuid4()),
-		'user_id': str(maxId),
+		'device_id': str(device2),
 		'name': "Potaito",
 		'rating': Decimal(5.0),
 		'culture': "potaito",
-		'length': 0,
-		'modules': None,
+		'duration': 0,
 	}
 )
 
 recipeTable.put_item(
 	Item={
-        'recipe_id': str(recipe1),
-		'user_id': str(dianaId),
-		'name': "Salad",
+        'recipe_id': str(recipe2),
+		'device_id': str(device3),
+		'name': "Potaito",
 		'rating': Decimal(4.5),
 		'culture': "salad",
-		'length': 1,
-		'modules': str(module1),
+		'duration': 3,
 	}
 )
 
@@ -175,9 +172,6 @@ moduleTable.put_item(
         'module_id': str(module1),
         'recipe_id': str(recipe1),
         'name': "Temperature",
-		'trigger_id': str(trigger1),
-		'hardware_id1': str(hardware1),
-        'hardware_id2': str(hardware1),
 		'value': Decimal(20.0),
         'delta': Decimal(2.0),
 	}
@@ -188,9 +182,6 @@ moduleTable.put_item(
         'module_id': str(module2),
         'recipe_id': str(recipe2),
         'name': "Moisure",
-		'trigger_id': str(trigger2),
-		'hardware_id1': str(hardware1),
-		'hardware_id2': str(hardware2),
         'value': Decimal(60.0),
         'delta': Decimal(5.0),
 	}
@@ -202,12 +193,11 @@ hardwareTable.put_item(
 	Item={
         'hardware_id': str(hardware1),
         'module_id': str(module1),
-        'hw_type': "DHT_TEMPERATURE",
         'name': "DHT",
-        'pins': [1,2],
+        'hw_type': "DHT_TEMPERATURE",
 		'value': Decimal(20.0),
         'delta': Decimal(2.0),
-        'user_id': str(maxId),
+        'pins': [1,2],
     }
 )
 
@@ -215,12 +205,11 @@ hardwareTable.put_item(
 	Item={
         'hardware_id': str(hardware2),
         'module_id': str(module1),
-        'hw_type': "DIGITAL_WRITER",
         'name': "Pin",
-        'pins': [3],
-		'value': Decimal(60.0),
+        'hw_type': "DIGITAL_WRITER",
+        'value': Decimal(60.0),
         'delta': Decimal(2.0),
-        'user_id': str(maxId),
+        'pins': [3],
 	}
 )
 
