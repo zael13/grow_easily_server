@@ -69,7 +69,7 @@ class Hardware:
         elif hw_type == HWType.DIGITAL_WRITER:
             return DigitalWriter(hardware_id, name, hw_type, pins)
         elif hw_type == HWType.DIGITAL_READER:
-            return DigitalReader(hardware_id, name, hw_type, pins, value, delta)
+            return DigitalReader(hardware_id, name, hw_type, pins)
         elif hw_type == HWType.ANALOG_READER:
             return AnalogReader(hardware_id, name, hw_type, pins, value, delta)
         elif hw_type == HWType.DHT_TEMPERATURE or hw_type == HWType.DHT_HUMIDITY:
@@ -107,8 +107,26 @@ class DigitalWriter(Hardware):
 
 
 class DigitalReader(Hardware):
-    def __init__(self, hardware_id, name, hw_type, pins=None, value=None, delta=None):
-        super().__init__(hardware_id, name, hw_type, pins, value, delta)
+    def __init__(self, hardware_id, name, hw_type, pins):
+        super().__init__(hardware_id, name, hw_type, pins)
+        if GPIO.getmode() != GPIO.BCM:
+            GPIO.setmode(GPIO.BCM)
+        if pins and len(pins) == 1:
+            GPIO.setup(pins[0], GPIO.IN)
+            self.value = Hardware.HW_OFF
+        else:
+            raise ValueError(pins)
+
+    def write(self, msg):
+        if msg is Hardware.HW_ON:
+            self.value = GPIO.input(self.pins[0])
+        elif msg is Hardware.HW_OFF:
+            pass
+        else:
+            raise ValueError(msg)
+
+    def read(self):
+        return self.value
 
 
 class AnalogReader(Hardware):

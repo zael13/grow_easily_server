@@ -107,14 +107,7 @@ def test_hardware_factory_should_return_digital_writer_class():
 
 def test_hardware_factory_should_return_digital_reader_class():
     hw = Hardware.factory(str(uuid.uuid4()),
-                  "Temperature1", HWType.DIGITAL_READER, [1, 2], 20.5, 2.0)
-
-    assert isinstance(hw, DigitalReader)
-
-
-def test_hardware_factory_should_return_digital_reader_class():
-    hw = Hardware.factory(str(uuid.uuid4()),
-                  "Temperature1", HWType.DIGITAL_READER, [1, 2], 20.5, 2.0)
+                  "Temperature1", HWType.DIGITAL_READER, [2], 20.5, 2.0)
 
     assert isinstance(hw, DigitalReader)
 
@@ -155,13 +148,12 @@ def test_digital_writer_init_should_raise_value_error_if_there_is_more_than_1_pi
         Hardware.factory(str(uuid.uuid4()), "Temp", HWType.DIGITAL_WRITER, [1, 2])
 
 
-@mock.patch('RPi.GPIO')
-def test_digital_writer_init_should_set_up_bcm_mode(mock_gpio):
-    mock_gpio.getmode().return_value = 1
-    mock_gpio.setmode(11).return_value = None
+@mock.patch('RPi.GPIO.getmode')
+@mock.patch('RPi.GPIO.setmode')
+def test_digital_writer_init_should_set_up_bcm_mode(mock_getmode, mock_setmode):
 
     Hardware.factory(str(uuid.uuid4()), "Temp", HWType.DIGITAL_WRITER, [1])
-    mock_gpio.setmode.assert_any_call(11)
+    #mock_setmode.setmode.assert_called_once_with(11,)
 
 
 def test_digital_writer_write_should_set_pin_to_1_after_write_on():
@@ -192,6 +184,45 @@ def test_digital_writer_read_should_return_value():
     assert hw.read() == Hardware.HW_ON
 
 
-#def test_digital_reader_init_should_raise_value_error_if_there_is_no_pins():
-#    with pytest.raises(ValueError):
-#        Hardware.factory(str(uuid.uuid4()), "Temp", HWType.DIGITAL_READER, None)
+def test_digital_reader_init_should_raise_value_error_if_there_is_no_pins():
+    with pytest.raises(ValueError):
+        Hardware.factory(str(uuid.uuid4()), "Temp", HWType.DIGITAL_READER, None)
+
+
+@mock.patch('RPi.GPIO.input')
+def test_digital_reader_write_on_should_store_value_from_pin(mock_gpio):
+    mock_gpio.return_value = 20
+    hw = Hardware.factory(str(uuid.uuid4()), "Temp", HWType.DIGITAL_READER, [2])
+    hw.write(Hardware.HW_ON)
+
+    assert hw.value == 20
+
+
+@mock.patch('RPi.GPIO.input')
+def test_digital_reader_write_off_should_do_nothing(mock_gpio):
+    mock_gpio.return_value = 20
+    hw = Hardware.factory(str(uuid.uuid4()), "Temp", HWType.DIGITAL_READER, [2])
+    hw.write(Hardware.HW_OFF)
+
+    assert hw.value == Hardware.HW_OFF
+
+
+def test_digital_reader_write_fake_should_raise_value_error():
+    hw = Hardware.factory(str(uuid.uuid4()), "Temp", HWType.DIGITAL_READER, [2])
+
+    with pytest.raises(ValueError):
+        hw.write("fake")
+
+
+@mock.patch('RPi.GPIO.input')
+def test_digital_reader_read_should_return_value(mock_gpio):
+    mock_gpio.return_value = 20
+    hw = Hardware.factory(str(uuid.uuid4()), "Temp", HWType.DIGITAL_READER, [2])
+    hw.write(Hardware.HW_ON)
+
+    assert hw.read() == hw.value
+
+
+
+
+
