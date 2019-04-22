@@ -1,18 +1,38 @@
 from datetime import datetime, timedelta, time
 from enum import Enum
 
+#from grow_easily_server.domain.hardware import Hardware
+
 
 class Module:
-    def __init__(self, module_id, name, trigger_id, hardware_id1, value=None, delta=None, hardware_id2=None):
+    def __init__(self, module_id, name, trigger_id, hardware, value=None, delta=None, hardware_id2=None):
         # self.__check_input_values(name, trigger_id, hardware_id1, value)
 
         self.module_id = module_id
         self.name = name
         self.trigger_id = trigger_id
-        self.hardware_id1 = hardware_id1
+        if hardware:
+            self.hardware = hardware
+        else:
+            self.hardware = []
         self.value = value
         self.delta = delta
         self.hardware_id2 = hardware_id2
+
+        self.is_active = False
+
+    def run(self):
+        if not self.is_active:
+            #and self.trigger_id.isOn():
+            #self.hardware_id1.on()
+            self.is_active = True
+        elif self.is_active:
+            #and not self.trigger_id.isOn():
+            #self.hardware_id1.off()
+            self.is_active = False
+
+
+
 
     # @staticmethod
     # def __check_input_values(name, trigger, hardware, data_type):
@@ -32,7 +52,7 @@ class Module:
         module = Module(module_id=adict['module_id'],
                         name=adict['name'],
                         trigger_id=adict['trigger_id'],
-                        hardware_id1=adict['hardware_id1'],
+                        hardware=adict['hardware'] if ('hardware' in adict) else [],
                         value=adict['value'] if ('value' in adict) else None,
                         delta=adict['delta'] if ('delta' in adict) else None,
                         hardware_id2=adict['hardware_id2'] if ('hardware_id2' in adict) else None)
@@ -43,7 +63,7 @@ class Module:
             'module_id': self.module_id,
             'name': self.name,
             'trigger_id': self.trigger_id,
-            'hardware_id1': self.hardware_id1,
+            'hardware': self.hardware,
             'value': self.value,
             'delta': ''.join(self.delta),
             'hardware_id2': ''.join(self.hardware_id2),

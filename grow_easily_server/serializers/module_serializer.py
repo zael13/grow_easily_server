@@ -11,7 +11,7 @@ class ModuleEncoder(DecimalEncoder):
                     'module_id': str(o.module_id),
                     'name': o.name,
                     'trigger_id': o.trigger_id,
-                    'hardware_id1': o.hardware_id1,
+                    'hardware_id1': o.hardware,
                     'value': str(o.value),
                 }
             else:
