@@ -11,8 +11,8 @@ class ModuleEncoder(DecimalEncoder):
                     'module_id': str(o.module_id),
                     'name': o.name,
                     'recipe_id': o.recipe_id,
-                    'hardware_id1': o.hardware_id1,
                     'value': str(o.value),
+                    'delta': o.delta,
                 }
             else:
                 to_serialize = super().default(o)
