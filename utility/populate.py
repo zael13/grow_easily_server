@@ -10,6 +10,14 @@ maxId = uuid.uuid4()
 dianaId = uuid.uuid4()
 antonId = uuid.uuid4()
 
+def gen_id_list(n):
+	return [str(uuid.uuid4()) for i in range(1, n+1)]
+
+users = [maxId, dianaId, antonId]
+devices = gen_id_list(9)
+recipes = gen_id_list(9)
+modules = gen_id_list(81)
+
 device1 = uuid.uuid4()
 device2 = uuid.uuid4()
 device3 = uuid.uuid4()
@@ -89,103 +97,43 @@ userTable.put_item(
 
 deviceTable = dynamodb.Table('Device')
 
-deviceTable.put_item(
-	Item={
-        'device_id': str(device1),
-		'user_id': str(maxId),
-		'recipe_id': str(recipe1),
-		'name': "dev1",
-		'start_time': 1555331650,
-	}
-)
-
-deviceTable.put_item(
-	Item={
-        'device_id': str(device2),
-		'user_id': str(maxId),
-		'recipe_id': str(recipe1),
-		'name': "dev2",
-		'start_time': 1555331650,
-	}
-)
-
-deviceTable.put_item(
-	Item={
-        'device_id': str(device3),
-		'user_id': str(dianaId),
-		'recipe_id': str(recipe2),
-		'name': "dev3",
-		'start_time': 1555331650,
-	}
-)
-
-deviceTable.put_item(
-	Item={
-        'device_id': str(device4),
-		'user_id': str(antonId),
-		'recipe_id': str(recipe2),
-		'name': "dev4",
-		'start_time': 1555331650,
-	}
-)
-
+for i in range(0, len(devices)):
+	deviceTable.put_item(
+		Item={
+	       	'device_id': str(devices[i]),
+			'user_id': str(users[int(i/3)]),
+			'recipe_id': str(recipes[i]),
+			'name': "dev"+str(i),
+			'start_time': 1555331650+i,
+		}
+	)
 
 recipeTable = dynamodb.Table('Recipe')
 
-recipeTable.put_item(
-	Item={
-        'recipe_id': str(recipe1),
-		'device_id': str(maxId),
-		'name': "Tomato",
-		'rating': Decimal(5.0),
-		'culture': "tomatoes",
-		'duration': 2,
-	}
-)
-
-recipeTable.put_item(
-	Item={
-        'recipe_id': str(uuid.uuid4()),
-		'device_id': str(device2),
-		'name': "Potaito",
-		'rating': Decimal(5.0),
-		'culture': "potaito",
-		'duration': 0,
-	}
-)
-
-recipeTable.put_item(
-	Item={
-        'recipe_id': str(recipe2),
-		'device_id': str(device3),
-		'name': "Potaito",
-		'rating': Decimal(4.5),
-		'culture': "salad",
-		'duration': 3,
-	}
-)
+for i in range(0, len(recipes)):
+	recipeTable.put_item(
+		Item={
+	        'recipe_id': str(recipes[i]),
+			'device_id': str(devices[i]),
+			'name': "recipe"+str(i),
+			'rating': Decimal(int(i/10)),
+			'culture': "tomatoes",
+			'duration': Decimal(int(i)),
+		}
+	)
 
 moduleTable = dynamodb.Table('Module')
 
-moduleTable.put_item(
-	Item={
-        'module_id': str(module1),
-        'recipe_id': str(recipe1),
-        'name': "Temperature",
-		'value': Decimal(20.0),
-        'delta': Decimal(2.0),
-	}
-)
-
-moduleTable.put_item(
-	Item={
-        'module_id': str(module2),
-        'recipe_id': str(recipe2),
-        'name': "Moisure",
-        'value': Decimal(60.0),
-        'delta': Decimal(5.0),
-	}
-)
+for i in range(0, len(modules)):
+	moduleTable.put_item(
+		Item={
+	        'module_id': str(modules[int(i/9)]),
+	        'recipe_id': str(recipes[int(i/9)]),
+	        'name': "Module"+str(i),
+			'value': Decimal(int(i*2)),
+	        'delta': Decimal(int(i/5)),
+		}
+	)
 
 hardwareTable = dynamodb.Table('Hardware')
 
@@ -237,6 +185,61 @@ triggerTable.put_item(
 	}
 )
 
+measurementTable = dynamodb.Table('Measurement')
+
+measurementTable.put_item(
+	Item={
+        'measurement_id': '1',
+        'device_id': str(device1),
+        'timestamp': '1',
+        'temperature': Decimal(20.0),
+		'moisture': Decimal(60.0),
+	}
+)
+
+measurementTable.put_item(
+	Item={
+        'measurement_id': '2',
+        'device_id': str(device1),
+        'timestamp': str(2),
+        'temperature': Decimal(20.0),
+		'moisture': Decimal(60.0),
+		'light': Decimal(6.0),
+	}
+)
+
+measurementTable.put_item(
+	Item={
+        'measurement_id': '3',
+        'device_id': str(device1),
+        'timestamp': str(4),
+        'temperature': Decimal(22.0),
+		'moisture': Decimal(60.0),
+		'ph_level': Decimal(6.0),
+	}
+)
+
+measurementTable.put_item(
+	Item={
+        'measurement_id': '4',
+        'device_id': str(device1),
+        'timestamp': str(4),
+        'temperature': Decimal(20.0),
+		'moisture': Decimal(50.0),
+		'ph_level': Decimal(6.5),
+	}
+)
+
+measurementTable.put_item(
+	Item={
+        'measurement_id': '5',
+        'device_id': str(device1),
+        'timestamp': str(5),
+        'temperature': Decimal(21.0),
+		'moisture': Decimal(50.0),
+		'ph_level': Decimal(4.0),
+	}
+)
 
 
 print(userTable.scan())
